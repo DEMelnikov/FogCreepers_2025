@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static Unity.Collections.Unicode;
 
 public class HeroMage : UnitBase
         
@@ -12,6 +13,10 @@ public class HeroMage : UnitBase
     private bool RuneKnown = false;
     private GameObject KnownRune;
     public float step;
+    public int RuneListenSkill = 5;
+    public int RuneListenSpeed = 5;
+
+    public float RuneSkillDelayCounter;
 
     //private Vector2 TargetPoint;
 
@@ -42,6 +47,8 @@ public class HeroMage : UnitBase
         else if (ActiveAction == HeroActivities.idle && RuneKnown == true)
         {
             print("Explore is over - start listen - closing");
+            SetTargetPoint(new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y));
+            SetStep(DeafaultSpeed);
             NewActivity = HeroActivities.runeListen;
         }
         else NewActivity = HeroActivities.idle;
@@ -102,8 +109,8 @@ public class HeroMage : UnitBase
         }
         if (ActiveAction == HeroActivities.runeListen)
         {
-            SetTargetPoint(new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y));
-            SetStep(DeafaultSpeed);
+            // SetTargetPoint(new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y));
+            //SetStep(DeafaultSpeed);
             //print($"Set step is now = {step} by ds {DeafaultSpeed}");
             //TargetPoint = new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y);
             RuneListen(); return;
@@ -112,15 +119,28 @@ public class HeroMage : UnitBase
 
     private void RuneListen()
     {
-        if (Vector2.Distance(transform.position, TargetPoint) <= stopRadius)
+        //print($"Stop cause range {Vector2.Distance(transform.position, TargetPoint)} and stop range is {stopRadius}");
+
+        if (Vector2.Distance(transform.position, TargetPoint) <= stopRadius && step>0)
         {
+            //print($"Stop chikibarum range {Vector2.Distance(transform.position, TargetPoint)} and stop range is {stopRadius} step is {step}" );
+            //print($"Stop chikibarum step is {step}");
             SetStep(0);
+            SetRuneDelayCounter(KnownRune);
+           // print($"Stop chikibarum step is {step}");
+        }
+        else if (Vector2.Distance(transform.position, TargetPoint) > stopRadius)
+        {
+            print($"Stop cause range {Vector2.Distance(transform.position, TargetPoint)} and stop range is {stopRadius}");
+            Move();
         }
         else
         {
-            //print($"Stop cause range {Vector2.Distance(transform.position, TargetPoint)} and stop range is {stopRadius}");
-            Move();
+            print("trying to resolve");
+            RuneSkillDelayCounter = RuneSkillDelayCounter - RuneListenSpeed * Time.deltaTime;
+            TryToResolveRune(RuneSkillDelayCounter);
         }
+
 
     }
 
@@ -129,5 +149,36 @@ public class HeroMage : UnitBase
         transform.position = Vector2.MoveTowards(transform.position, TargetPoint, step);
     }
 
+    private void TryToResolveRune(float timer)
+    {
+
+
+        if (timer<=0)
+        {
+            if (SkillCheckVSRune(KnownRune))
+            {
+                print("Success check");
+            }
+            else print("Unsuccess check");
+            SetRuneDelayCounter(KnownRune);
+        }
+    }
+
+    private bool SkillCheckVSRune(GameObject rune)
+    {
+        int SkillCheckDice = 20;
+
+        bool checkResult = false;
+        if (RuneListenSkill+Random.Range(1,SkillCheckDice) > rune.GetComponent<RuneData>().GetRuneDC())
+        {
+            checkResult = true;
+        }
+        return checkResult;
+    }
+
+    private void SetRuneDelayCounter(GameObject rune)
+    {
+        RuneSkillDelayCounter = rune.GetComponent<RuneData>().GetDelayCounter();
+    }
 
 }
