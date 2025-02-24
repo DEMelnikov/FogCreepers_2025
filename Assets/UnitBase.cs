@@ -10,7 +10,7 @@ public class UnitBase : MonoBehaviour
     public float DeafaultSpeed = 1f;
     public float RadiusRandomSearch = 30f;
 
-    protected HeroActivities ActiveAction = HeroActivities.idle;
+    public HeroActivities ActiveAction = HeroActivities.idle;
     protected Vector2 TargetPoint;
     protected float stopRadius;
     protected int checkCloseToBGBorderforRandom = 4;
@@ -19,8 +19,7 @@ public class UnitBase : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        TargetPoint = new Vector2(0, 0);
-
+        SetTargetPoint(new Vector2(0, 0));
     }
 
     // Update is called once per frame
@@ -50,7 +49,7 @@ public class UnitBase : MonoBehaviour
            Random.Range(transform.position.x - RadiusRandomSearch * deltaleft, (transform.position.x + RadiusRandomSearch * deltaRight)),
            Random.Range(transform.position.y - RadiusRandomSearch * deltaDown, transform.position.y + RadiusRandomSearch * deltaUp));
 
-        Debug.Log ($"Got new point in ExporeMode {targetPoint.x} {targetPoint.y}");
+        //Debug.Log ($"Got new point in ExporeMode {targetPoint.x} {targetPoint.y}");
         return targetPoint;
     }
 
@@ -133,9 +132,20 @@ public class UnitBase : MonoBehaviour
         //transform.position = Vector3.MoveTowards(transform.position, _endPos, Time.deltaTime * _velocity);
     }
 
+
     protected void GetNewAction()
     {
         
 
+    }
+
+    public void SetAction(HeroActivities Action)
+    {
+        ActiveAction = Action;
+    }
+
+    public void SetTargetPoint (Vector2 TP)
+    {
+        TargetPoint = TP;
     }
 }

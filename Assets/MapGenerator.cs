@@ -18,8 +18,7 @@ public class MapGenerator : MonoBehaviour
     {
         GameObject obj = GameObject.Find("background");
          max_width = obj.GetComponent<MapParams>().GetWidth();
-         max_height = obj.GetComponent<MapParams>().GetHeight();
-        
+         max_height = obj.GetComponent<MapParams>().GetHeight();        
 
 
         for (int i = 0; i<RunesQuantity; i++)

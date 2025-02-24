@@ -1,4 +1,6 @@
+using System.IO;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class HeroMage : UnitBase
         
@@ -8,53 +10,46 @@ public class HeroMage : UnitBase
     //public float DeafaultSpeed = 0.1f;
 
     private bool RuneKnown = false;
-    private float step;
+    private GameObject KnownRune;
+    public float step;
 
     //private Vector2 TargetPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        step = DeafaultSpeed*Time.deltaTime; 
+        SetStep(DeafaultSpeed);
         stopRadius = 5f;
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
-        if (ActiveAction == HeroActivities.idle)
-        {
-            ActiveAction=GetNewActivity();
-        }
-        if (ActiveAction == HeroActivities.runeListen)
-        {
-            RuneListenAction();
-        }
-
+        SwitchAction();
 
     }
-    private HeroActivities GetNewActivity()
+    private HeroActivities SetNewActivity()
     {
         HeroActivities NewActivity;
 
-        if (ActiveAction == HeroActivities.idle & RuneKnown == false)
+        if (ActiveAction == HeroActivities.idle && RuneKnown == false)
         {
+            NewActivity = HeroActivities.reuneExpore;
+            print("Mage action is Rune Expolore");
+            TargetPoint = GetTaregetPointExporeMode();
+        }
+        else if (ActiveAction == HeroActivities.idle && RuneKnown == true)
+        {
+            print("Explore is over - start listen - closing");
             NewActivity = HeroActivities.runeListen;
-            print("Mage action is Rune Listen");
-            TargetPoint= GetTaregetPointExporeMode();
         }
-        else
-        {
-            NewActivity = HeroActivities.idle;
-        }
+        else NewActivity = HeroActivities.idle;
 
-        return NewActivity;
+            return NewActivity;
     }
 
-    private void RuneListenAction()
+    private void ExploreMapForRunes()
     {
         //print("Start procedure ");
 
@@ -73,11 +68,66 @@ public class HeroMage : UnitBase
 
             else
             {
-                transform.position = Vector2.MoveTowards(transform.position, TargetPoint, step);
+                Move();
             }
         }
     }
 
+    public void SetStep(float speed)
+    {
+        step = speed * Time.deltaTime;
+        //print($"step is now {step}");
+    }
+
+    public void RuneKnownSwitch (bool runeStatus)
+    {
+        RuneKnown = runeStatus;
+    }
+
+    public void SetKnownRune(GameObject rune)
+    {
+        KnownRune = rune;
+    }
+
+    public void SwitchAction()
+    {
+        if (ActiveAction == HeroActivities.idle)
+        {
+            ActiveAction = SetNewActivity(); return;
+        }
+        if (ActiveAction == HeroActivities.reuneExpore)
+        {
+            SetStep(DeafaultSpeed);
+            ExploreMapForRunes();return;
+        }
+        if (ActiveAction == HeroActivities.runeListen)
+        {
+            SetTargetPoint(new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y));
+            SetStep(DeafaultSpeed);
+            //print($"Set step is now = {step} by ds {DeafaultSpeed}");
+            //TargetPoint = new Vector2(KnownRune.transform.position.x, KnownRune.transform.position.y);
+            RuneListen(); return;
+        }
+    }
+
+    private void RuneListen()
+    {
+        if (Vector2.Distance(transform.position, TargetPoint) <= stopRadius)
+        {
+            SetStep(0);
+        }
+        else
+        {
+            //print($"Stop cause range {Vector2.Distance(transform.position, TargetPoint)} and stop range is {stopRadius}");
+            Move();
+        }
+
+    }
+
+    private void Move()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, TargetPoint, step);
+    }
 
 
 }
