@@ -23,6 +23,7 @@ public class HeroStateIdle : HeroState
 
     public override void FrameUpdate()
     {
+        Debug.Log("Update");
         base.FrameUpdate();
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
 {
@@ -8,6 +9,8 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
     public float CurrentHealth { get; set; }
     public Rigidbody2D RB { get ; set; }
     public bool IsFacingRight { get; set; }
+    public float DefaultVelocity { get; set; }
+    public float ActualVelocity { get; set; }
 
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
@@ -16,12 +19,21 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
 
     #endregion
 
+    private Hero()
+    {
+        StateMaschine = new HeroStateMaschine();
+        IdleState = new HeroStateIdle(this, StateMaschine);
+        StateMaschine.CurrentHeroState = IdleState;
+    }
     private void Awake()
     {
-        StateMaschine=new HeroStateMaschine();
-        IdleState = new HeroStateIdle(this,StateMaschine);
 
+        Vector2 point = new Vector3(100, 100);
 
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = point;
+
+        //this.GetComponent<NavMeshAgent>().nextPosition(new Vector3(100, 100, 0));
     }
     public void CheckForLeftOrRightFacing(Vector2 velocity)
     {
@@ -55,6 +67,7 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
         StateMaschine.CurrentHeroState.FrameUpdate();
     }
 
+    public void ChangeActualVelocity (float newVelocity)   { ActualVelocity = newVelocity; }
     private void FixedUpdate()
     {
         StateMaschine.CurrentHeroState.PhysicUpdate();

@@ -3,9 +3,9 @@ using UnityEngine;
 public class HeroStateMaschine
 {
     public HeroState CurrentHeroState { get; set; }
-    public void Initialize(HeroState starttingState)
+    public void Initialize(HeroState startingState)
     {
-        CurrentHeroState = starttingState;
+        CurrentHeroState = startingState;
         CurrentHeroState.EnterState();
     }
 
