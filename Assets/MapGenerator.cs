@@ -9,23 +9,24 @@ public class MapGenerator : MonoBehaviour
     public float RunePointBorderIndent = 30;
 
 
-    private float max_width;
-    private float max_height;
+    //private float max_width;
+    //private float max_height;
     //private 
 
 
     void Start()
     {
-        GameObject obj = GameObject.Find("background");
-         max_width = obj.GetComponent<MapParams>().GetWidth();
-         max_height = obj.GetComponent<MapParams>().GetHeight();        
+        MapGlobalActions Map = new MapGlobalActions(400, 200, 50);
+
+        //GameObject obj = GameObject.Find("background");
+        // max_width = obj.GetComponent<MapParams>().GetWidth();
+       //  max_height = obj.GetComponent<MapParams>().GetHeight();        
 
 
         for (int i = 0; i<RunesQuantity; i++)
         {
-            Instantiate(Runeprefub, GetRandomPoint(), Quaternion.identity);
+            Instantiate(Runeprefub, Map.GetRandomPointWithIndent(true), Quaternion.identity);
         }
-
 
     }
 
@@ -35,16 +36,4 @@ public class MapGenerator : MonoBehaviour
         
     }
 
-    private Vector2 GetRandomPoint()
-    {
-        //Vector2 RandomPoint = new Vector2(0, 0);
-
-        Vector2 RandomPoint = new Vector2(
-            Random.Range(max_width/2*-1 + RunePointBorderIndent, max_width/2 - RunePointBorderIndent),
-            Random.Range(max_height/2*-1 + RunePointBorderIndent , max_height/2- RunePointBorderIndent));
-
-        print($"Random x {RandomPoint.x} and {RandomPoint.y}");
-
-        return RandomPoint;
-    }
 }
