@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MapGlobalActions
+public class MapGlobalActions:MonoBehaviour
 {
     private int map_width = 400;
     private int map_height = 200;
@@ -11,6 +11,14 @@ public class MapGlobalActions
         this.map_width = map_width;
         this.map_height = map_height;
         this.borderIndent = borderIndent;
+    }
+
+    public MapGlobalActions()
+    {
+        // удалить этот конструктор после фиксы этого костыля
+        //this.map_width = map_width;
+        //this.map_height = map_height;
+        //this.borderIndent = borderIndent;
     }
 
     public int GetMaxWidth() { return map_width; }

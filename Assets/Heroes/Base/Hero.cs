@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,21 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
     public float CurrentHealth { get; set; }
     public Rigidbody2D RB { get ; set; }
     public bool IsFacingRight { get; set; }
+    public bool IsFacingUp { get; set; }
     public float DefaultVelocity { get; set; }
-    public float ActualVelocity { get; set; }
+    
+    protected float distanceToChangeGoal { get; set; }
+    //public float ActualVelocity { get; set; }
 
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
+    public HeroEploreRunesState ExporeRuneState { get; set; }
+    private NavMeshAgent agent { get; set; }
+    private Transform heroPosition { get; set; }
+    private int RadiusRandomSearch { get; set; }
+    private bool RuneKnown { get; set; }
+    private GameObject KnownRune { get; set; }
+
 
     #region Test
 
@@ -21,17 +32,28 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
 
     private Hero()
     {
-        StateMaschine = new HeroStateMaschine();
-        IdleState = new HeroStateIdle(this, StateMaschine);
-        StateMaschine.CurrentHeroState = IdleState;
+
+
     }
     private void Awake()
     {
+        StateMaschine = new HeroStateMaschine();
+        IdleState = new HeroStateIdle(this, StateMaschine);
+        ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
+        //StateMaschine.Initialize(IdleState);
+        StateMaschine.Initialize(ExporeRuneState);
+
+
+        RadiusRandomSearch = 50;
+        distanceToChangeGoal = 5;
+        RuneKnown = false;
+
 
         Vector2 point = new Vector3(100, 100);
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         agent.destination = point;
+        heroPosition = GetComponent<Transform>();
 
         //this.GetComponent<NavMeshAgent>().nextPosition(new Vector3(100, 100, 0));
     }
@@ -55,24 +77,33 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
         throw new System.NotImplementedException();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //float temp = agent.velocity;
+        //Debug.Log();
         StateMaschine.CurrentHeroState.FrameUpdate();
     }
 
-    public void ChangeActualVelocity (float newVelocity)   { ActualVelocity = newVelocity; }
+    //public void ChangeActualVelocity (float newVelocity)   { ActualVelocity = newVelocity; }
+    public bool GetIsFacingRight () { return IsFacingRight; }
+    public void SetIsFacingRight(bool newBool) {IsFacingRight = newBool; }
+    public bool GetIsFacingUp() { return IsFacingUp; }
+    public void SetIsFacingUp(bool newBool) { IsFacingUp = newBool; }
+    public Transform GetHeroPosition () { return heroPosition; }
+    public int GetRadiusRandomSearch() { return RadiusRandomSearch; }
+    public float GetdistanceToChangeGoal() { return distanceToChangeGoal; }
+    public NavMeshAgent GetAgent() { return agent; }
     private void FixedUpdate()
     {
         StateMaschine.CurrentHeroState.PhysicUpdate();
     }
     private void AnimationTriggerEvent (AnimationTriggerType triggerType) { }
+
 
     public enum AnimationTriggerType
     {
