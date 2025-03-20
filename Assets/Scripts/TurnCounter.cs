@@ -1,25 +1,27 @@
+using TMPro;
 using UnityEngine;
 
 public class TurnCounter : MonoBehaviour
 {
-    // ButtonNextTurn testqq = new ButtonNextTurn();
     [SerializeField]
-    private GameObject buttonqq;
+    private TMP_Text TurnCounterText;
+    int i = 0;
 
     private void OnEnable()
     {
 
         //buttonqq.GetComponent<ButtonNextTurn>().
-        ButtonNextTurn.onNextTurn += tempqwqq;
+        ButtonNextTurn.onNextTurn += CounterUp;
 
         //buttonqq.
 
         //ButtonNextTurn.onNextTurn +=
     }
 
-    private void tempqwqq()
+    private void CounterUp()
     {
-        Debug.Log("pressed");
+        i++;
+        TurnCounterText.SetText(i.ToString());
     }
 
 }
