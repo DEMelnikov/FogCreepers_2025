@@ -126,12 +126,13 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
 
     public void OnMouseDown()
     {
+        Hero_Selected();
+    }
+
+    public void Hero_Selected()
+    {
         GameObject testObject = this.gameObject;
-
-        Debug.Log("hit! blya" + testObject.name.ToString());
-
         heroSelected?.Invoke(this.gameObject);
-
     }
 
     public enum AnimationTriggerType
