@@ -19,5 +19,18 @@ public class OrthographicZoom : MonoBehaviour
         targetZoom = Mathf.Clamp(targetZoom, maxZoom, minZoom);
         float newSize = Mathf.MoveTowards(cam.orthographicSize, targetZoom, speed * Time.deltaTime);
         cam.orthographicSize = newSize;
+
+      //  if (Input.GetMouseButtonDown(0))
+      //  {
+     //       Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+     //       RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+                
+     //       if (hit)
+     //       {
+     //           Debug.Log("hit");
+      //          Debug.Log(hit.collider.gameObject.tag);
+      //      }
+     //   }
+
     }
 }

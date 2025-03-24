@@ -15,8 +15,7 @@ public class ButtonNextTurn : MonoBehaviour
         onNextTurn?.Invoke();
         //Debug.LogFormat("pressed");
     }
-
-    
+   
 
     private void test1()
     {

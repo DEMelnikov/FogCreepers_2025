@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class TurnCounter : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     private TMP_Text TurnCounterText;
     int i = 0;
 
     private void OnEnable()
     {
 
+        TurnCounterText = GameObject.Find("TurnCounter").GetComponent<TMP_Text>();
         //buttonqq.GetComponent<ButtonNextTurn>().
         ButtonNextTurn.onNextTurn += CounterUp;
 
@@ -21,7 +22,14 @@ public class TurnCounter : MonoBehaviour
     private void CounterUp()
     {
         i++;
+
+        
         TurnCounterText.SetText(i.ToString());
+    }
+
+    private void OnDisable()
+    {
+        ButtonNextTurn.onNextTurn -= CounterUp;
     }
 
 }

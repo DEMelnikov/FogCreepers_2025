@@ -1,10 +1,11 @@
 using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
+public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectable
 {
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
@@ -26,36 +27,55 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
     private GameObject KnownRune { get; set; }
 
 
+    private string path = "Avatars/";
+    [SerializeField] private string spriteName = "1";
+
+
     #region Test
 
     #endregion
+
+
+    public delegate void HeroSelected(GameObject heroObject);
+    public static event HeroSelected heroSelected;
 
     private Hero()
     {
 
 
     }
+
+
     private void Awake()
     {
         StateMaschine = new HeroStateMaschine();
         IdleState = new HeroStateIdle(this, StateMaschine);
         ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
-        //StateMaschine.Initialize(IdleState);
-        StateMaschine.Initialize(ExporeRuneState);
+        StateMaschine.Initialize(IdleState);
+        //StateMaschine.Initialize(ExporeRuneState);
 
 
         RadiusRandomSearch = 50;
         distanceToChangeGoal = 5;
         RuneKnown = false;
 
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
 
-        Vector2 point = new Vector3(100, 100);
 
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = point;
-        heroPosition = GetComponent<Transform>();
+        //Vector2 point = new Vector3(100, 100);
+
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+       // agent.destination = point;
+      //  heroPosition = GetComponent<Transform>();
 
         //this.GetComponent<NavMeshAgent>().nextPosition(new Vector3(100, 100, 0));
+    }
+
+    private void OnEnable()
+    {
+       // GameObject.Find("RuneListener (1)").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(path + "1");
     }
     public void CheckForLeftOrRightFacing(Vector2 velocity)
     {
@@ -104,10 +124,33 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable
     }
     private void AnimationTriggerEvent (AnimationTriggerType triggerType) { }
 
+    public void OnMouseDown()
+    {
+        GameObject testObject = this.gameObject;
+
+        Debug.Log("hit! blya" + testObject.name.ToString());
+
+        heroSelected?.Invoke(this.gameObject);
+
+    }
 
     public enum AnimationTriggerType
     {
         EnemyDamaged,
         PlayFootstepsSound
     }
+
+    public string GetAvatarSprite()
+    {
+        return path + spriteName;
+    }
+
+
+ //   void OnMouseDown()
+   // {
+     //   GameObject testObject = this.gameObject;
+     //
+       // Debug.Log("hit! blya" + testObject.name.ToString());
+    //}
+
 }
