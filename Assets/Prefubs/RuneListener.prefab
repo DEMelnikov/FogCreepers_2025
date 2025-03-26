@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6906321297381671160}
   - component: {fileID: 7256303813890988421}
   - component: {fileID: 4470298529049391273}
+  - component: {fileID: 1437828032572152231}
   m_Layer: 0
   m_Name: RuneListener
   m_TagString: Hero
@@ -174,6 +175,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbe1003895bbfb459b4296673a07779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeroName: 
   maxHealth: 100
   maxEnergy: 100
   maxWill: 100
+  TargetWaypoint: {x: 0, y: 0}
+--- !u!114 &1437828032572152231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865407208263851379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e5fe362d3218e4fbca603752c6451d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkAble: 0

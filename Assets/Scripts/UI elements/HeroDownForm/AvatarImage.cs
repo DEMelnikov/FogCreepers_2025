@@ -10,11 +10,13 @@ public class AvatarImage : MonoBehaviour
     [SerializeField] private GameObject waypoint;
     [SerializeField] private GameObject waypointPrefub;
     [SerializeField] private GameObject selectedObject = null;
+    [SerializeField] private GameObject ButtonWalkAble;
 
     private void OnEnable()
     {
         //ButtonNextTurn.onNextTurn += SmthSelected;
         Hero.heroSelected += SmthSelected;
+        ButtonWalkAble.SetActive(false);
     }
 
     private void SmthSelected(GameObject heroObject)
@@ -42,6 +44,19 @@ public class AvatarImage : MonoBehaviour
 
                     waypoint = Instantiate(waypointPrefub, HeroWaypoint, Quaternion.identity);
                 }
+
+                //
+
+                ButtonWalkAble.SetActive(true);
+                //ButtonWalkAble?.GetComponent<Toggle>()?.GetComponent<WalkableToggle>().UpdateToggle();
+                ButtonWalkAble.transform.Find("Toggle_WalkButton").gameObject.
+                    GetComponent<WalkableToggle>().UpdateToggle();
+
+
+                // GetComponent<Toggle>().name.ToString());
+                //Debug.Log("-2-" + ButtonWalkAble?.GetComponent<Toggle>()?.GetComponent<WalkableToggle>().name.ToString());
+                //ButtonWalkAble.GetComponent<WalkableToggle>
+
             }
 
 

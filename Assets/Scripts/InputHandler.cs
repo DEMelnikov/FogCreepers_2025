@@ -3,7 +3,7 @@ using static Hero;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] GameObject SelectedObject;
+    [SerializeField] private GameObject SelectedObject;
 
     void Update()
     {
