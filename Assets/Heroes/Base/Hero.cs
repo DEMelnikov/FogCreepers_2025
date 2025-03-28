@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -36,8 +37,9 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
     #endregion
 
 
-    public delegate void HeroSelected(GameObject heroObject);
-    public static event HeroSelected heroSelected;
+    // public delegate void HeroSelected(GameObject heroObject);
+    // public static event HeroSelected heroSelected;
+    public event Action<Hero> HeroSelected;
 
     private Hero()
     {
@@ -126,13 +128,14 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
 
     public void OnMouseDown()
     {
-        Hero_Selected();
+       // Debug.Log("U are 1/2 the champion!");
+        HeroIsSelected();
     }
 
-    public void Hero_Selected()
+    private void HeroIsSelected()
     {
         GameObject testObject = this.gameObject;
-        heroSelected?.Invoke(this.gameObject);
+        HeroSelected?.Invoke(this);
     }
 
     public enum AnimationTriggerType
