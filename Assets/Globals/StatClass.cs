@@ -26,6 +26,13 @@ public class StatClass
         return SuccessChange;
     }
 
+    public void SetActualValue(float newValue)
+    {
+        actual = newValue;
+        if (newValue > Max) {actual = Max;}
+        if (newValue < Min) {actual = Min;}
+    }
+
     public void ChangeTempMax (float value)
     {
         tempmax += value;
@@ -36,5 +43,15 @@ public class StatClass
     public void PowerChangeActual (float value)
     {
         actual += value;
+    }
+
+    public float GetMaxStat()
+    {
+        return max;  
+    }
+
+    public float GetActualValue()
+    {
+        return actual;
     }
 }

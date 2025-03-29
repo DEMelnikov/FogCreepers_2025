@@ -15,9 +15,10 @@ public class HeroStatController : MonoBehaviour
 
     private HeroStatController ()
     {
-        Health = new StatClass(0, maxHealth, maxHealth, maxHealth);
-        Energy = new StatClass(0,maxEnergy, maxEnergy, maxEnergy);
-        Will   = new StatClass(0,maxWill, maxWill, maxWill);
+      //  int randomInt = Random.Range(0, (int)maxHealth);
+        Health = new StatClass(0, maxHealth, 50, maxHealth);
+        Energy = new StatClass(0,maxEnergy, 75, maxEnergy);
+        Will   = new StatClass(0,maxWill, 25, maxWill);
     }
 
     public string GetHeroName()
@@ -34,5 +35,12 @@ public class HeroStatController : MonoBehaviour
     {
         TargetWaypoint = newWaypoint;
     }
+
+    public StatClass GetHealth() {  return Health; }
+    public StatClass GetEnergy() { return Energy; }
+    public StatClass GetWill() { return Will; }
+
+    //public StatClass SetActual
+
 
 }

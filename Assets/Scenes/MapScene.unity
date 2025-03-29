@@ -324,6 +324,10 @@ PrefabInstance:
       propertyPath: HeroName
       value: Sedlo
       objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: maxHealth
+      value: 79.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
       value: Hero (1)
@@ -512,6 +516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe298d052cec08479b0f14748cdb7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectedHero: {fileID: 0}
+  HealthSlider: {fileID: 1131382845}
+  EnergySlider: {fileID: 532285109}
+  WillSlider: {fileID: 1874684655}
 --- !u!1 &214974995
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +532,7 @@ GameObject:
   - component: {fileID: 214974998}
   - component: {fileID: 214974997}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TextLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1146,6 +1154,10 @@ PrefabInstance:
       propertyPath: HeroName
       value: Lad
       objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: maxHealth
+      value: 79.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
       value: Hero (2)
@@ -1413,6 +1425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 532285110}
   - component: {fileID: 532285111}
+  - component: {fileID: 532285112}
   m_Layer: 0
   m_Name: EnergySlider
   m_TagString: Untagged
@@ -1493,6 +1506,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &532285112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532285109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10850bd62bf41694589f9429b0db8c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554766163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,6 +2792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131382846}
   - component: {fileID: 1131382847}
+  - component: {fileID: 1131382848}
   m_Layer: 0
   m_Name: HealthSlider
   m_TagString: Untagged
@@ -2847,6 +2873,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1131382848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131382845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10850bd62bf41694589f9429b0db8c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1221259763 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3466194620550771566, guid: f3ec66c31b0c4a74ea23058db4b0a0dc, type: 3}
@@ -3097,6 +3135,10 @@ PrefabInstance:
     - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: HeroName
       value: Yuh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: maxHealth
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
@@ -3927,7 +3969,7 @@ GameObject:
   - component: {fileID: 1724949956}
   - component: {fileID: 1724949955}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TextLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4211,6 +4253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1874684656}
   - component: {fileID: 1874684657}
+  - component: {fileID: 1874684658}
   m_Layer: 0
   m_Name: WillSlider
   m_TagString: Untagged
@@ -4291,6 +4334,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1874684658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874684655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10850bd62bf41694589f9429b0db8c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1883527462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4501,7 +4556,7 @@ GameObject:
   - component: {fileID: 1926604837}
   - component: {fileID: 1926604836}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: TextLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
