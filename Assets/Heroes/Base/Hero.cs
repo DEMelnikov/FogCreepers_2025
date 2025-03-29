@@ -6,10 +6,10 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectable
+public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 {
-    public float MaxHealth { get; set; }
-    public float CurrentHealth { get; set; }
+   // public float MaxHealth { get; set; }
+   // public float CurrentHealth { get; set; }
     public Rigidbody2D RB { get ; set; }
     public bool IsFacingRight { get; set; }
     public bool IsFacingUp { get; set; }
@@ -20,12 +20,12 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
 
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
-    public HeroEploreRunesState ExporeRuneState { get; set; }
+  //  public HeroEploreRunesState ExporeRuneState { get; set; }
     private NavMeshAgent agent { get; set; }
     private Transform heroPosition { get; set; }
-    private int RadiusRandomSearch { get; set; }
-    private bool RuneKnown { get; set; }
-    private GameObject KnownRune { get; set; }
+  //  private int RadiusRandomSearch { get; set; }
+  //  private bool RuneKnown { get; set; }
+  //  private GameObject KnownRune { get; set; }
 
 
     private string path = "Avatars/";
@@ -52,14 +52,14 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
     {
         StateMaschine = new HeroStateMaschine();
         IdleState = new HeroStateIdle(this, StateMaschine);
-        ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
+       // ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
         StateMaschine.Initialize(IdleState);
         //StateMaschine.Initialize(ExporeRuneState);
 
 
-        RadiusRandomSearch = 50;
-        distanceToChangeGoal = 5;
-        RuneKnown = false;
+       // RadiusRandomSearch = 50;
+        //distanceToChangeGoal = 5;
+        //RuneKnown = false;
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -117,8 +117,8 @@ public class Hero : MonoBehaviour, HeroISDamageable, HeroIsMoveable, IsSelectabl
     public bool GetIsFacingUp() { return IsFacingUp; }
     public void SetIsFacingUp(bool newBool) { IsFacingUp = newBool; }
     public Transform GetHeroPosition () { return heroPosition; }
-    public int GetRadiusRandomSearch() { return RadiusRandomSearch; }
-    public float GetdistanceToChangeGoal() { return distanceToChangeGoal; }
+   // public int GetRadiusRandomSearch() { return RadiusRandomSearch; }
+   // public float GetdistanceToChangeGoal() { return distanceToChangeGoal; }
     public NavMeshAgent GetAgent() { return agent; }
     private void FixedUpdate()
     {

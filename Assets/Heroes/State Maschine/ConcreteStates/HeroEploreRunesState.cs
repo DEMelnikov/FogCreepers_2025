@@ -38,10 +38,10 @@ public class HeroEploreRunesState : HeroState
 
 
         base.FrameUpdate();
-        if (agent.remainingDistance < hero.GetdistanceToChangeGoal())
-        {
-            agent.destination = GetTaregetPointExporeMode();
-        }
+        //if (agent.remainingDistance < hero.GetdistanceToChangeGoal())
+        //{
+        //    agent.destination = GetTaregetPointExporeMode();
+        //}
     }
 
     public override void PhysicUpdate()
@@ -58,17 +58,17 @@ public class HeroEploreRunesState : HeroState
         float max_width = map.GetMaxWidth();
         float max_height = map.GetMaxHeight();
 
-        if (y - hero.GetRadiusRandomSearch() <= max_height / 2 * -1 && !hero.GetIsFacingUp()) hero.SetIsFacingUp(true);
-        if (y + hero.GetRadiusRandomSearch() >= max_height / 2 && hero.GetIsFacingUp()) hero.SetIsFacingUp(false);
+        //if (y - hero.GetRadiusRandomSearch() <= max_height / 2 * -1 && !hero.GetIsFacingUp()) hero.SetIsFacingUp(true);
+        //if (y + hero.GetRadiusRandomSearch() >= max_height / 2 && hero.GetIsFacingUp()) hero.SetIsFacingUp(false);
 
-        if (x - hero.GetRadiusRandomSearch() <= max_width / 2 * -1 && hero.GetIsFacingRight()) hero.SetIsFacingRight(false);
-        if (x + hero.GetRadiusRandomSearch() >= max_width / 2 && !hero.GetIsFacingRight()) hero.SetIsFacingRight(true);
+        //if (x - hero.GetRadiusRandomSearch() <= max_width / 2 * -1 && hero.GetIsFacingRight()) hero.SetIsFacingRight(false);
+        //if (x + hero.GetRadiusRandomSearch() >= max_width / 2 && !hero.GetIsFacingRight()) hero.SetIsFacingRight(true);
 
-        if (hero.GetIsFacingUp()) deltaDown = 0; else deltaUp = 0;
-        if (hero.GetIsFacingRight()) deltaRight = 0; else deltaleft = 0;
-        Vector2 targetPoint = new Vector2(
-        Random.Range(x - hero.GetRadiusRandomSearch() * deltaleft, (x + hero.GetRadiusRandomSearch() * deltaRight)),
-           Random.Range(y - hero.GetRadiusRandomSearch() * deltaDown, y + hero.GetRadiusRandomSearch() * deltaUp));
+        //if (hero.GetIsFacingUp()) deltaDown = 0; else deltaUp = 0;
+        //if (hero.GetIsFacingRight()) deltaRight = 0; else deltaleft = 0;
+        //Vector2 targetPoint = new Vector2(
+        //Random.Range(x - hero.GetRadiusRandomSearch() * deltaleft, (x + hero.GetRadiusRandomSearch() * deltaRight)),
+        //   Random.Range(y - hero.GetRadiusRandomSearch() * deltaDown, y + hero.GetRadiusRandomSearch() * deltaUp));
 
         return targetPoint;
     }

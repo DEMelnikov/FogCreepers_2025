@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7256303813890988421}
   - component: {fileID: 4470298529049391273}
   - component: {fileID: 1437828032572152231}
-  - component: {fileID: -1607096050059309267}
   - component: {fileID: 654334179708581777}
   m_Layer: 0
   m_Name: Hero
@@ -195,18 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkAble: 0
---- !u!114 &-1607096050059309267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6865407208263851379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f598f80b0b32574b8a9b675ef3b6b0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &654334179708581777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +211,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -1607096050059309267}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: HeroUIController, Assembly-CSharp
           m_MethodName: OnHeroPoinyClick
           m_Mode: 1
