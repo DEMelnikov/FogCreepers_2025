@@ -10,6 +10,7 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private Vector2 TargetWaypoint = new Vector2();
     [SerializeField] private bool HaveWayPoint = false;
     [SerializeField] private float NewWaypointRadius = 2f;
+   // [SerializeField] private GameObject WayPointGhostPrefub;
     [SerializeField] private GameObject WayPointPrefub;
 
     public StatClass Health;
@@ -39,8 +40,20 @@ public class HeroStatController : MonoBehaviour
             TargetWaypoint = newWaypoint;
             Debug.Log("New Waypoint");
             HaveWayPoint = true;
+            if (this.gameObject.GetComponent<Hero>().StateMaschine.CurrentHeroState.GetStateName() == "Move")
+            {
+                Debug.Log("reset destination");
+                this.gameObject.GetComponent<Hero>().StateMaschine.CurrentHeroState.EnterState();
+            }
             DrawWaypoints();
         }
+    }
+
+    public void WaypointReached()
+    {
+        HaveWayPoint = false;
+        TargetWaypoint = new Vector2 (0, 0);
+        DrawWaypoints();
     }
 
     public StatClass GetHealth() {  return Health; }
@@ -55,7 +68,7 @@ public class HeroStatController : MonoBehaviour
 
         foreach (GameObject point in gameObjects)
         {
-           Destroy(point);
+           if (point != null) { Destroy(point); }
         }
 
         if (HaveWayPoint)

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629ac1db57fd5164bbb640a65b01cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
+  waypointPrefub: {fileID: 3468954378953056536, guid: f94e106f62c73174db235a168c2f7bdd, type: 3}
   spriteName: 1
 --- !u!58 &-6906321297381671160
 CircleCollider2D:
@@ -184,6 +184,7 @@ MonoBehaviour:
   TargetWaypoint: {x: 0, y: 0}
   HaveWayPoint: 0
   NewWaypointRadius: 2
+  WayPointGhostPrefub: {fileID: 3468954378953056536, guid: f94e106f62c73174db235a168c2f7bdd, type: 3}
   WayPointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
 --- !u!114 &1437828032572152231
 MonoBehaviour:

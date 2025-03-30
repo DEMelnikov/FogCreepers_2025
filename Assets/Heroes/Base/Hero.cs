@@ -11,11 +11,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     public Rigidbody2D RB { get ; set; }
     public bool IsFacingRight { get; set; }
     public bool IsFacingUp { get; set; }
-    public float DefaultVelocity { get; set; }
-    
+    public float DefaultVelocity { get; set; }    
     protected float distanceToChangeGoal { get; set; }
-
-
 
     private NavMeshAgent agent { get; set; }
     private Transform heroPosition { get; set; }
@@ -34,6 +31,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     //StateMaschine block
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
+    private HeroStateMoving MoveState { get; set; }
+
     //
     #endregion
 
@@ -49,6 +48,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     {
         StateMaschine = new HeroStateMaschine();
         IdleState = new HeroStateIdle(this, StateMaschine);
+        MoveState = new HeroStateMoving(this, StateMaschine);
 
        // ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
         StateMaschine.Initialize(IdleState);
@@ -61,7 +61,6 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 
         //Vector2 point = new Vector3(100, 100);
 
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
        // agent.destination = point;
       //  heroPosition = GetComponent<Transform>();
 
@@ -112,6 +111,9 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     public string GetAvatarSprite() { return path + spriteName; }
     public Transform GetHeroPosition () { return heroPosition; }
     public NavMeshAgent GetAgent() { return agent; }
+    public HeroStateMoving GetStateMoving() { return MoveState; }
+    public HeroStateIdle GetStateIdle() { return IdleState; }
+
     private void FixedUpdate()
     {
         StateMaschine.CurrentHeroState.PhysicUpdate();

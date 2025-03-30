@@ -16,6 +16,7 @@ public class HeroState
     public virtual void FrameUpdate() { }
     public virtual void PhysicUpdate() { }
     public virtual void AnimationTriggerEvent(Hero.AnimationTriggerType triggerType) { }
+    public virtual string GetStateName() { return ""; }
 
 
 
