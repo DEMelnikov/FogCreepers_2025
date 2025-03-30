@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: -1751076685
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7926600038972401099, guid: fba3737379c781e488d97a47bd3eac05, type: 3}
   m_Color: {r: 0.9245283, g: 0.08198643, b: 0.715125, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629ac1db57fd5164bbb640a65b01cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
   spriteName: 1
 --- !u!58 &-6906321297381671160
 CircleCollider2D:
@@ -181,6 +182,9 @@ MonoBehaviour:
   maxEnergy: 100
   maxWill: 100
   TargetWaypoint: {x: 0, y: 0}
+  HaveWayPoint: 0
+  NewWaypointRadius: 2
+  WayPointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
 --- !u!114 &1437828032572152231
 MonoBehaviour:
   m_ObjectHideFlags: 0

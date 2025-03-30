@@ -54,4 +54,9 @@ public class StatClass
     {
         return actual;
     }
+
+    public float GetPercent()
+    {
+        return actual/ max;
+    }
 }

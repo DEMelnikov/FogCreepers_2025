@@ -8,11 +8,18 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private float maxEnergy = 100;
     [SerializeField] private float maxWill   = 100;
     [SerializeField] private Vector2 TargetWaypoint = new Vector2();
+    [SerializeField] private bool HaveWayPoint = false;
+    [SerializeField] private float NewWaypointRadius = 2f;
+    [SerializeField] private GameObject WayPointPrefub;
 
     public StatClass Health;
     public StatClass Energy;
     public StatClass Will;
 
+    private void Awake()
+    {
+        //WayPointPrefub 
+    }
     private HeroStatController ()
     {
       //  int randomInt = Random.Range(0, (int)maxHealth);
@@ -21,24 +28,41 @@ public class HeroStatController : MonoBehaviour
         Will   = new StatClass(0,maxWill, 25, maxWill);
     }
 
-    public string GetHeroName()
-    {
-        return HeroName;
-    }
+    public string GetHeroName()  {return HeroName;}
 
-    public Vector2 GetTargetWaypoint()
-    {
-        return TargetWaypoint;
-    }
+    public Vector2 GetTargetWaypoint()  { return TargetWaypoint;}
 
-    public void SetTargerWaypoint(Vector2 newWaypoint)
+    public void SetTargetWaypoint(Vector2 newWaypoint) 
     {
-        TargetWaypoint = newWaypoint;
+        if (Vector3.Distance(newWaypoint, this.gameObject.transform.position) >= NewWaypointRadius)
+        {
+            TargetWaypoint = newWaypoint;
+            Debug.Log("New Waypoint");
+            HaveWayPoint = true;
+            DrawWaypoints();
+        }
     }
 
     public StatClass GetHealth() {  return Health; }
     public StatClass GetEnergy() { return Energy; }
     public StatClass GetWill() { return Will; }
+    public bool GetHaveWaypoint() { return HaveWayPoint; }
+
+    public void DrawWaypoints()
+    {
+        GameObject[] gameObjects;
+        gameObjects = GameObject.FindGameObjectsWithTag("Waypoint");
+
+        foreach (GameObject point in gameObjects)
+        {
+           Destroy(point);
+        }
+
+        if (HaveWayPoint)
+        {
+            Instantiate(WayPointPrefub, TargetWaypoint, Quaternion.identity);
+        }
+    }
 
     //public StatClass SetActual
 

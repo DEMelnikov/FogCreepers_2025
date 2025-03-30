@@ -23,10 +23,17 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
   //  public HeroEploreRunesState ExporeRuneState { get; set; }
     private NavMeshAgent agent { get; set; }
     private Transform heroPosition { get; set; }
-  //  private int RadiusRandomSearch { get; set; }
-  //  private bool RuneKnown { get; set; }
-  //  private GameObject KnownRune { get; set; }
+    //  private int RadiusRandomSearch { get; set; }
+    //  private bool RuneKnown { get; set; }
+    //  private GameObject KnownRune { get; set; }
 
+    // fo drag n drop example:
+    //private Vector3 screenPoint;
+    private Vector3 offset;
+    private GameObject ghostObject;
+    [SerializeField] private GameObject waypointPrefub;
+
+    //
 
     private string path = "Avatars/";
     [SerializeField] private string spriteName = "1";
@@ -130,12 +137,34 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     {
        // Debug.Log("U are 1/2 the champion!");
         HeroIsSelected();
+
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Create a ghost preview
+        ghostObject = Instantiate(waypointPrefub, transform.position, Quaternion.identity);
+        //ghostObject.GetComponent<Collider>().enabled = false;   
+        ghostObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+    }
+
+
+    public void OnMouseDrag()
+    {
+        Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+        ghostObject.transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+    }
+
+    void OnMouseUp()
+    {
+        // Destroy the ghost object when dragging is complete                
+        this.gameObject.GetComponent<HeroStatController>().SetTargetWaypoint(ghostObject.transform.position);        
+        Destroy(ghostObject);
     }
 
     private void HeroIsSelected()
     {
-        GameObject testObject = this.gameObject;
+        //GameObject testObject = this.gameObject;
         HeroSelected?.Invoke(this);
+        this.GetComponent<HeroStatController>().DrawWaypoints();    
     }
 
     public enum AnimationTriggerType

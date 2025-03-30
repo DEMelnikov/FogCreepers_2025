@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapBackground
   - Hero
+  - Waypoint
   layers:
   - Default
   - TransparentFX

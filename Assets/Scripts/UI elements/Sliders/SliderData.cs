@@ -23,7 +23,7 @@ public class SliderData : MonoBehaviour
 
     public void SetSlider(StatClass values)
     {
-        Object.transform.GetComponent<Slider>().value = values.GetActualValue()/values.GetMaxStat();
+        Object.transform.GetComponent<Slider>().value = values.GetPercent();
     }
 
 

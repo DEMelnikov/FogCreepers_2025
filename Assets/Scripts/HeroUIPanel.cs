@@ -32,8 +32,6 @@ public class HeroUIPanel : MonoBehaviour
 
             WillSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetWill());
             WillSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetWill());
-
-
         }
     }
 }

@@ -328,6 +328,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 79.3
       objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: NewWaypointRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
       value: Hero (1)
@@ -1157,6 +1161,10 @@ PrefabInstance:
     - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: maxHealth
       value: 79.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: NewWaypointRadius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
@@ -3140,10 +3148,18 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 115
       objectReference: {fileID: 0}
+    - target: {fileID: 4470298529049391273, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: NewWaypointRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6865407208263851379, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 7853817302160688976, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7926600038972401099, guid: fba3737379c781e488d97a47bd3eac05, type: 3}
     - target: {fileID: 8707068872920566752, guid: 80ca06ff14038b3438ef97d291e6055a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.757288
