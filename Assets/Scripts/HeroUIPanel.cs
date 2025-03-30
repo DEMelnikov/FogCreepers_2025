@@ -19,6 +19,8 @@ public class HeroUIPanel : MonoBehaviour
         SelectedHero = hero;
     }
 
+    public Hero GetSelectedHero() {return SelectedHero;}
+
     public void UpdatePanels(Hero hero)
     {
         if (hero.tag == "Hero") 

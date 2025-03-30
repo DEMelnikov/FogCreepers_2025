@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ButtonNextTurn : MonoBehaviour
 {
-    [SerializeField] private bool IsPause = true;
+    [SerializeField] private bool IsInPause = true;
     public delegate void OnNextTurn();
     public static event OnNextTurn onNextTurn;
     
@@ -15,32 +15,27 @@ public class ButtonNextTurn : MonoBehaviour
     public void NextTurn()
     {
         onNextTurn?.Invoke();
-        //Debug.LogFormat("pressed");
     }
    
-
-    private void test1()
-    {
-        Debug.LogFormat("pressed - test");
-    }
-
     public void SwitchPause()
     {
-        if (IsPause) 
+        if (IsInPause) 
         { 
-            IsPause = false;
+            IsInPause = false;
+            IsPause.SetPause(IsInPause);
             this.gameObject.GetComponent<Image>().color = Color.green;
         } 
         else 
         { 
-            IsPause = true;
+            IsInPause = true;
+            IsPause.SetPause(IsInPause);
             this.gameObject.GetComponent<Image>().color = Color.red;
         }
     }
 
     public bool GetIsPause()
     {
-        return IsPause;
+        return IsInPause;
     }
 
 

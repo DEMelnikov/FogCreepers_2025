@@ -23,12 +23,20 @@ public class HeroStateIdle : HeroState
 
     public override void FrameUpdate()
     {
-        Debug.Log("Update - i'm idle");
+        Debug.Log("Update - i'm idle" + base.hero.name+ IsPause.GetPauseState());
+       // IsPause.GetPauseState();
+
         base.FrameUpdate();
     }
 
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+    }
+
+    private bool IsReadyToMove()
+    {
+        
+        return false;
     }
 }
