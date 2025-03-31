@@ -15,15 +15,26 @@ public class StatClass
     public float Actual { get => actual; }
     public float TempMax { get => tempmax; }
 
-    public bool ChangeActual (float value)
+    public void ChangeActual (float value)
     {
-        bool SuccessChange = false;
+        //bool SuccessChange = false;
         
-        if ((actual += value)>=min && (actual += value) >= max) 
-            { SuccessChange = true;
-              actual += value;
-            }
-        return SuccessChange;
+        if ((actual += value)<=min) //&& (actual += value) <= max) 
+        { 
+            //SuccessChange = true;
+            //actual += value;
+            actual = min;
+        }
+        else if ((actual += value) >= max)
+        {
+            actual = max;
+        }
+        else
+        {
+            actual += value;
+        }
+
+        //return SuccessChange;
     }
 
     public void SetActualValue(float newValue)

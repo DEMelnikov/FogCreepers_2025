@@ -18,6 +18,8 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private float SpeedEP = 0.01f;
     #endregion
 
+    [SerializeField] private float RestoreEnergyEP = 0.015f;
+
     public StatClass Health;
     public StatClass Energy;
     public StatClass Will;
@@ -39,6 +41,7 @@ public class HeroStatController : MonoBehaviour
     public void SetMoveAllowed(bool newValue) {  MoveAllowed = newValue;}
     public float GetBaseSpeed() { return BaseSpeed;}
     public float GetSpeedEP() {  return SpeedEP;}
+    public float GetRestoreEnergyEP() { return RestoreEnergyEP;}
 
     public Vector2 GetTargetWaypoint()  { return TargetWaypoint;}
 

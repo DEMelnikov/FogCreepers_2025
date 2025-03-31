@@ -24,7 +24,7 @@ public class HeroStateIdle : HeroState
     public override void FrameUpdate()
     {
        // Debug.Log("Update - i'm idle" + base.hero.name+ IsPause.GetPauseState());
-       if (IsReadyToMove()){ base.hero.StateMaschine.ChangeState(base.hero.GetStateMoving()); }
+
 
         base.FrameUpdate();
     }
@@ -37,7 +37,15 @@ public class HeroStateIdle : HeroState
 
     public override void PhysicUpdate()
     {
-        base.PhysicUpdate();
+        if (IsReadyToMove()) { base.hero.StateMaschine.ChangeState(base.hero.GetStateMoving()); }
+
+        if (!IsPause.GetPauseState())
+        {
+            hero.GetComponent<HeroStatController>().ChangeEnergy(
+                hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
+        }
+
+            base.PhysicUpdate();
     }
 
     private bool IsReadyToMove()
