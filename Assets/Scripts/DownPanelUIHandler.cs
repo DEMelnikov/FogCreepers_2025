@@ -20,6 +20,15 @@ public class DownPanelUIHandler : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (RaidGlobals.GetSelectedObject() != null && RaidGlobals.GetSelectedObject().tag == "Hero")
+        {
+            //UpdatePanels();
+            HeroUIPanel.GetComponent<HeroUIPanel>().UpdateEnergySlider();
+        }    
+    }
+
     private void SelectionIsHero(Hero hero)
     {
         UpdatePanels();

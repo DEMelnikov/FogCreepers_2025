@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,7 @@ public class SliderData : MonoBehaviour
 
     public void SetMaxValue(StatClass values)
     {
-        //this.find("Text (TMP)").Get
-        //Object.GetComponent<TMP_Text>().SetText();
-        //Debug.Log("QQQ" + Object.name);
-        string toText = values.GetActualValue().ToString() + " / " + values.GetMaxStat().ToString();
+        string toText = Math.Round(values.GetActualValue(),1).ToString() + " / " + values.GetMaxStat().ToString();
         Object.transform.Find("TextLabel").GetComponent<TMP_Text>().SetText(toText);
     }
 
@@ -25,6 +23,8 @@ public class SliderData : MonoBehaviour
     {
         Object.transform.GetComponent<Slider>().value = values.GetPercent();
     }
+
+
 
 
 }

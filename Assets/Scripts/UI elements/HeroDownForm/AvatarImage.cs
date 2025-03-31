@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AvatarImage : MonoBehaviour
 {
-    [SerializeField] private GameObject selectedObject = null;
+    //[SerializeField] private GameObject selectedObject = null;
     private GameObject[] heroes ;
 
     private void Awake()

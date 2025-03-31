@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 67559086}
   m_Layer: 0
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: MainSceneUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1966,7 +1966,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.588
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2152,7 +2152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dde2c274403fbd4eb3f75d3b3eb5c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedObject: {fileID: 0}
 --- !u!1 &661724871
 GameObject:
   m_ObjectHideFlags: 0

@@ -159,8 +159,4 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         EnemyDamaged,
         PlayFootstepsSound
     }
-
-
-
-
 }

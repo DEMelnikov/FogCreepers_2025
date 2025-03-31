@@ -19,6 +19,7 @@ public class HeroStateMoving : HeroState
 
     public override void ExitState()
     {
+        base.hero.GetAgent().isStopped = true;
         base.ExitState();
     }
 
@@ -43,13 +44,25 @@ public class HeroStateMoving : HeroState
             base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
         }
 
-        if (IsPause.GetPauseState()|| hero.GetComponent<HeroStatController>().GetMoveAllowed()==false)
+        if (IsPause.GetPauseState())
         { 
             base.hero.GetAgent().isStopped = true;
+            //base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
         }
         else
         {
-            base.hero.GetAgent().isStopped = false; 
+            base.hero.GetAgent().isStopped = false;
+
+            if (hero.GetComponent<HeroStatController>().GetMoveAllowed())
+            {
+                Debug.Log("Update - Hero's moving " + base.hero.name + " Speed: " + base.hero.GetAgent().speed
+                + " Distance: " + base.hero.GetAgent().remainingDistance.ToString());
+                hero.GetComponent<HeroStatController>().ChangeEnergy(hero.GetComponent<HeroStatController>().GetSpeedEP() * -1);
+            }
+            else
+            {
+                base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
+            }
         }
 
             base.PhysicUpdate();
@@ -58,5 +71,6 @@ public class HeroStateMoving : HeroState
     public void ResetDestinaton()
     {
         base.hero.GetAgent().destination = base.hero.GetComponent<HeroStatController>().GetTargetWaypoint();
+        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetBaseSpeed();
     }
 }

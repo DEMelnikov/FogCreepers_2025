@@ -3,6 +3,7 @@ using UnityEngine;
 public class HeroOrdersStatus : MonoBehaviour
 {
     [SerializeField] private bool WalkAble = false;
+    [SerializeField] private GameObject UIPanels;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +19,5 @@ public class HeroOrdersStatus : MonoBehaviour
 
     public bool GetWalkAble() {  return WalkAble; }
     public void SetWalkAble(bool value) { WalkAble = value; }
-
 
 }

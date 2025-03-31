@@ -40,10 +40,19 @@ public class HeroUIPanel : MonoBehaviour
                 WillSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetWill());
             }
         }
+    }
 
+    public void UpdateEnergySlider()
+    {
+        if (RaidGlobals.GetSelectedObject())
+        {
+            Hero hero = RaidGlobals.GetSelectedObject().GetComponent<Hero>();
 
-
-
-
+            if (hero.tag == "Hero")
+            {               
+                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetEnergy());
+            }
+        }
     }
 }
