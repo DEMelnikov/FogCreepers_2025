@@ -5,6 +5,7 @@ public class DownPanelUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject Avatar;
     [SerializeField] private GameObject HeroUIPanel;
+    [SerializeField] private GameObject MoveButton;
     private GameObject[] heroes;
 
 
@@ -21,8 +22,13 @@ public class DownPanelUIHandler : MonoBehaviour
 
     private void SelectionIsHero(Hero hero)
     {
+        UpdatePanels();
+    }
+
+    public void UpdatePanels()
+    {
         HeroUIPanel.SetActive(true);
-        HeroUIPanel.GetComponent<HeroUIPanel>().SetSelectedHero(hero);
-        HeroUIPanel.GetComponent<HeroUIPanel>().UpdatePanels(hero);
+        HeroUIPanel.GetComponent<HeroUIPanel>().UpdatePanels();
+        MoveButton.GetComponent<MoveActionButton>().UpDateButtons();
     }
 }

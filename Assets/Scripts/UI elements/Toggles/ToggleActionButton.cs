@@ -1,28 +1,34 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ToggleActionButton : MonoBehaviour
 {
-    [SerializeField] private GameObject ControlledButton;
+   // [SerializeField] private GameObject ControlledButton;
 
-    //private Toggle m_Toggle;//Get Toggle component
-   //    private GameObject m_Toggle;
-
-
-
-    public void ToggleValueChanged()
+    public void OnClick()
     {
-        GameObject attached = gameObject;
-        bool isOn = attached.GetComponent<Toggle>().isOn;
 
-        if (isOn)
+
+        if (this.GetComponent<Toggle>().isOn)
         {
-            ControlledButton.GetComponent<Button>().interactable = true;
+            Debug.Log("allow on " + RaidGlobals.GetSelectedObject().tag);
+            if (RaidGlobals.GetSelectedObject() !=null && RaidGlobals.GetSelectedObject().tag== "Hero")
+            {
+                RaidGlobals.GetSelectedObject().GetComponent<HeroStatController>().SetMoveAllowed(true);
+                //this.gameObject.GetComponentInParent<HeroUIPanel>().UpdatePanels();
+            }
         }
         else
         {
-            ControlledButton.GetComponent<Button>().interactable = false;
+            if (RaidGlobals.GetSelectedObject() != null && RaidGlobals.GetSelectedObject().tag == "Hero")
+            {
+                RaidGlobals.GetSelectedObject().GetComponent<HeroStatController>().SetMoveAllowed(false);
+            }
         }
+        this.gameObject.GetComponentInParent<DownPanelUIHandler>().UpdatePanels();
     }
+
+
 }

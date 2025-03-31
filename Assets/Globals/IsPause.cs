@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public static class IsPause
+
 {
     private static bool IsPaused = true;
 

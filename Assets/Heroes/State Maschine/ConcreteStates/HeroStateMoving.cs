@@ -35,15 +35,15 @@ public class HeroStateMoving : HeroState
 
     public override void PhysicUpdate()
     {
-         Debug.Log("Update - i'm moving" + base.hero.name + base.hero.GetAgent().remainingDistance.ToString());
+        // Debug.Log("Update - i'm moving" + base.hero.name + base.hero.GetAgent().remainingDistance.ToString());
         //Debug.Log("Update - i'm moving");
-        if (base.hero.GetAgent().remainingDistance <= 2) 
+        if (base.hero.GetAgent().remainingDistance <= 2)
         {
             base.hero.GetComponent<HeroStatController>().WaypointReached();
-            base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());            
+            base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
         }
 
-        if (IsPause.GetPauseState())
+        if (IsPause.GetPauseState()|| hero.GetComponent<HeroStatController>().GetMoveAllowed()==false)
         { 
             base.hero.GetAgent().isStopped = true;
         }

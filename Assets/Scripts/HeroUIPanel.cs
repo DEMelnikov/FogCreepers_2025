@@ -3,37 +3,47 @@ using UnityEngine;
 
 public class HeroUIPanel : MonoBehaviour
 {
-    [SerializeField] private Hero SelectedHero;
+    //[SerializeField] private Hero SelectedHero;
     [SerializeField] private GameObject HealthSlider;
     [SerializeField] private GameObject EnergySlider;
     [SerializeField] private GameObject WillSlider; 
 
-    private GameObject[] heroes;
+    //private GameObject[] heroes;
     private void Awake()
     {
-        if (SelectedHero != null) { UpdatePanels(SelectedHero); }
-    }   
-
-    public void SetSelectedHero(Hero hero)
-    {
-        SelectedHero = hero;
+        if (RaidGlobals.GetSelectedObject() != null && RaidGlobals.GetSelectedObject().tag == "Hero") { UpdatePanels(); }
     }
 
-    public Hero GetSelectedHero() {return SelectedHero;}
+    //public void SetSelectedHero(Hero hero)
+    //{
+    //    SelectedHero = hero;
+    //}
 
-    public void UpdatePanels(Hero hero)
+    //public Hero GetSelectedHero() {return SelectedHero;}
+
+    public void UpdatePanels()
     {
-        if (hero.tag == "Hero") 
+        if (RaidGlobals.GetSelectedObject())
         {
-            Debug.Log("Yeah u are krasavcheg");
-            HealthSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetHealth());
-            HealthSlider.GetComponent<SliderData>().SetSlider  (hero.GetComponent<HeroStatController>().GetHealth());
+            Hero hero = RaidGlobals.GetSelectedObject().GetComponent<Hero>();
 
-            EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetEnergy());
-            EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetEnergy());
+            if (hero.tag == "Hero")
+            {
+                //Debug.Log("Yeah u are krasavcheg");
+                HealthSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetHealth());
+                HealthSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetHealth());
 
-            WillSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetWill());
-            WillSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetWill());
+                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetEnergy());
+
+                WillSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetWill());
+                WillSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetWill());
+            }
         }
+
+
+
+
+
     }
 }

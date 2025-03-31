@@ -23,7 +23,7 @@ public class HeroStateIdle : HeroState
 
     public override void FrameUpdate()
     {
-        Debug.Log("Update - i'm idle" + base.hero.name+ IsPause.GetPauseState());
+       // Debug.Log("Update - i'm idle" + base.hero.name+ IsPause.GetPauseState());
        if (IsReadyToMove()){ base.hero.StateMaschine.ChangeState(base.hero.GetStateMoving()); }
 
         base.FrameUpdate();

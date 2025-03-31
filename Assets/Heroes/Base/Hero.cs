@@ -149,8 +149,9 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     private void HeroIsSelected()
     {
         //GameObject testObject = this.gameObject;
+        RaidGlobals.SetSelectedObject(this.gameObject);
+        this.GetComponent<HeroStatController>().DrawWaypoints();
         HeroSelected?.Invoke(this);
-        this.GetComponent<HeroStatController>().DrawWaypoints();    
     }
 
     public enum AnimationTriggerType

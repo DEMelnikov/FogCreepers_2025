@@ -8,10 +8,11 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private float maxEnergy = 100;
     [SerializeField] private float maxWill   = 100;
     [SerializeField] private Vector2 TargetWaypoint = new Vector2();
+    
     [SerializeField] private bool HaveWayPoint = false;
     [SerializeField] private float NewWaypointRadius = 2f;
-   // [SerializeField] private GameObject WayPointGhostPrefub;
     [SerializeField] private GameObject WayPointPrefub;
+    [SerializeField] private bool MoveAllowed = true;
 
     public StatClass Health;
     public StatClass Energy;
@@ -30,6 +31,8 @@ public class HeroStatController : MonoBehaviour
     }
 
     public string GetHeroName()  {return HeroName;}
+    public bool GetMoveAllowed() { return MoveAllowed;}
+    public void SetMoveAllowed(bool newValue) {  MoveAllowed = newValue;}
 
     public Vector2 GetTargetWaypoint()  { return TargetWaypoint;}
 
