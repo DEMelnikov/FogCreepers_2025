@@ -16,6 +16,7 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private bool MoveAllowed = true;
     [SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
+                     private RStatClass MoveSettings = new RStatClass(0, 6,2); //TODO - убрать константы в конструктор
     #endregion
 
     [SerializeField] private float RestoreEnergyEP = 0.015f;
@@ -42,9 +43,7 @@ public class HeroStatController : MonoBehaviour
     public float GetBaseSpeed() { return BaseSpeed;}
     public float GetSpeedEP() {  return SpeedEP;}
     public float GetRestoreEnergyEP() { return RestoreEnergyEP;}
-
     public Vector2 GetTargetWaypoint()  { return TargetWaypoint;}
-
     public void SetTargetWaypoint(Vector2 newWaypoint) 
     {
         if (Vector3.Distance(newWaypoint, this.gameObject.transform.position) >= NewWaypointRadius)
@@ -60,19 +59,29 @@ public class HeroStatController : MonoBehaviour
             DrawWaypoints();
         }
     }
-
     public void WaypointReached()
     {
         HaveWayPoint = false;
         TargetWaypoint = new Vector2 (0, 0);
         DrawWaypoints();
     }
-
     public StatClass GetHealth() {  return Health; }
     public StatClass GetEnergy() { return Energy; }
     public void ChangeEnergy(float changeValue) {Energy.ChangeActual(changeValue);}
     public StatClass GetWill() { return Will; }
     public bool GetHaveWaypoint() { return HaveWayPoint; }
+    public RStatClass GetMoveSettings() {  return MoveSettings; }
+    public void SetMoveSettings(float min, float max, float actual, float def)
+    {
+        this.MoveSettings.SetMax(max);
+        this.MoveSettings.SetMin(min);
+        this.MoveSettings.SetActual(actual);
+        this.MoveSettings.SetDef(def);
+    }
+    public void SetMoveSettingsActual(float value)
+    {
+        MoveSettings.SetActual(value);
+    }
 
     public void DrawWaypoints()
     {

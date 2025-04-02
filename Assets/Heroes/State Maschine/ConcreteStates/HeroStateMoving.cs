@@ -71,6 +71,11 @@ public class HeroStateMoving : HeroState
     public void ResetDestinaton()
     {
         base.hero.GetAgent().destination = base.hero.GetComponent<HeroStatController>().GetTargetWaypoint();
-        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetBaseSpeed();
+        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetMoveSettings().GetActual();
+    }
+
+    public void UpdateSpeed()
+    {
+        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetMoveSettings().GetActual();
     }
 }
