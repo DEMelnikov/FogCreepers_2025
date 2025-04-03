@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HeroStateMoving : HeroState
 {
+    //private bool isTakingBreath=false;
+
     public HeroStateMoving(Hero hero, HeroStateMaschine heroStateMaschine) : base(hero, heroStateMaschine)
     {
     }
@@ -37,7 +39,7 @@ public class HeroStateMoving : HeroState
     public override void PhysicUpdate()
     {
         // Debug.Log("Update - i'm moving" + base.hero.name + base.hero.GetAgent().remainingDistance.ToString());
-        //Debug.Log("Update - i'm moving");
+
         if (base.hero.GetAgent().remainingDistance <= 2)
         {
             base.hero.GetComponent<HeroStatController>().WaypointReached();
@@ -51,12 +53,14 @@ public class HeroStateMoving : HeroState
         }
         else
         {
-            base.hero.GetAgent().isStopped = false;
-
             if (hero.GetComponent<HeroStatController>().GetMoveAllowed())
             {
+                base.hero.GetAgent().isStopped = false;
+
                 Debug.Log("Update - Hero's moving " + base.hero.name + " Speed: " + base.hero.GetAgent().speed
-                + " Distance: " + base.hero.GetAgent().remainingDistance.ToString());
+                     + " Distance: " + base.hero.GetAgent().remainingDistance.ToString()+" Aloowed "+
+                     hero.GetComponent<HeroStatController>().GetMoveAllowed().ToString());
+
                 UpdateEnergyByMove();
             }
             else
@@ -82,6 +86,14 @@ public class HeroStateMoving : HeroState
     public void UpdateEnergyByMove()
     {
         hero.GetComponent<HeroStatController>().ChangeEnergy(hero.GetComponent<HeroStatController>().GetMoveEP().GetActual() * -1);
+       
+        if (hero.GetComponent<HeroStatController>().GetEnergy().GetPercent() <= hero.GetComponent<HeroStatController>().GetCriticalLevelEnergy())
+        {
 
+            base.hero.StateMaschine.ChangeState(base.hero.GetStateRestoreEnergy());
+
+        }
     }
+
+
 }

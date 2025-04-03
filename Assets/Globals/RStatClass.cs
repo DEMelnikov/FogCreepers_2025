@@ -60,7 +60,7 @@ public class RStatClass
     {
         //float value =  
         float value = ((this.actual-this.min)*100)/(this.max-this.min);
-        Debug.Log("GetActualInPercentage: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + value.ToString());
+        //Debug.Log("GetActualInPercentage: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + value.ToString());
         return value;
     }
     public void SetActualByPercent(float percent) 
@@ -68,7 +68,7 @@ public class RStatClass
         if (percent > 0)
         {
             this.actual = this.min + ((this.max - this.min) * percent) / 100;
-            Debug.Log("SetActualByPercent: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + percent.ToString());
+            //Debug.Log("SetActualByPercent: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + percent.ToString());
 
         }
 

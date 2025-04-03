@@ -1,0 +1,51 @@
+using UnityEngine;
+
+public class HeroStateRestoreEnergy : HeroState
+{
+    public HeroStateRestoreEnergy(Hero hero, HeroStateMaschine heroStateMaschine) : base(hero, heroStateMaschine)
+    {
+    }
+
+    public override void AnimationTriggerEvent(Hero.AnimationTriggerType triggerType)
+    {
+        base.AnimationTriggerEvent(triggerType);
+    }
+
+    public override void EnterState()
+    {
+        //hero.GetComponent<HeroStatController>().SetMoveAllowed(false);
+        base.EnterState();
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+    }
+
+    public override void FrameUpdate()
+    {
+        base.FrameUpdate();
+    }
+
+    public override string GetStateName()
+    {
+        return "RestoreEnergy";
+    }
+
+    public override void PhysicUpdate()
+    {
+        if (!IsPause.GetPauseState())
+        {
+            hero.GetComponent<HeroStatController>().ChangeEnergy(
+                hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
+
+            if (hero.GetComponent<HeroStatController>().GetEnergy().GetPercent() >
+                hero.GetComponent<HeroStatController>().GetTargetEnergyToRestore())
+            {
+                base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
+            }
+        }
+
+        base.PhysicUpdate();
+    }
+}

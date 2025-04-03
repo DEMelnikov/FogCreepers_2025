@@ -21,21 +21,29 @@ public class HeroStatController : MonoBehaviour
     #endregion
 
     [SerializeField] private float RestoreEnergyEP = 0.015f;
+    [SerializeField] private float TargetEnergyToRestore = 0.25f;
+    [SerializeField] private float CriticalLevelEnergy = 0.1f;
+    
 
     public StatClass Health;
     public StatClass Energy;
     public StatClass Will;
 
+
+
+
     private void Awake()
     {
-        //WayPointPrefub 
+        //TargetEnergyToRestore = 0.25f;
+
     }
     private HeroStatController ()
     {
       //  int randomInt = Random.Range(0, (int)maxHealth);
         Health = new StatClass(0, maxHealth, 50, maxHealth);
-        Energy = new StatClass(0,maxEnergy, 75, maxEnergy);
+        Energy = new StatClass(0,maxEnergy, 35, maxEnergy);
         Will   = new StatClass(0,maxWill, 25, maxWill);
+
     }
 
     public string GetHeroName()  {return HeroName;}
@@ -68,6 +76,10 @@ public class HeroStatController : MonoBehaviour
     }
     public StatClass GetHealth() {  return Health; }
     public StatClass GetEnergy() { return Energy; }
+    public float GetTargetEnergyToRestore() { return TargetEnergyToRestore; }
+    public void SetTargetEnergyToRestore(float value ) { TargetEnergyToRestore = value; }
+    public float GetCriticalLevelEnergy() { return CriticalLevelEnergy; }
+    public void SetCriticalLevelEnergy(float value) {  CriticalLevelEnergy = value; }
     public void ChangeEnergy(float changeValue) {Energy.ChangeActual(changeValue);}
     public StatClass GetWill() { return Will; }
     public bool GetHaveWaypoint() { return HaveWayPoint; }

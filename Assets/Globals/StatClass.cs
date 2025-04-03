@@ -19,7 +19,7 @@ public class StatClass
     {
         //bool SuccessChange = false;
         
-        if ((actual += value)<=min) //&& (actual += value) <= max) 
+        if ((actual += value)<min) //&& (actual += value) <= max) 
         { 
             //SuccessChange = true;
             //actual += value;
