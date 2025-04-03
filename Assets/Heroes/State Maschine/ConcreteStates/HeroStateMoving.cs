@@ -57,7 +57,7 @@ public class HeroStateMoving : HeroState
             {
                 Debug.Log("Update - Hero's moving " + base.hero.name + " Speed: " + base.hero.GetAgent().speed
                 + " Distance: " + base.hero.GetAgent().remainingDistance.ToString());
-                hero.GetComponent<HeroStatController>().ChangeEnergy(hero.GetComponent<HeroStatController>().GetSpeedEP() * -1);
+                UpdateEnergyByMove();
             }
             else
             {
@@ -77,5 +77,11 @@ public class HeroStateMoving : HeroState
     public void UpdateSpeed()
     {
         base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetMoveSettings().GetActual();
+    }
+
+    public void UpdateEnergyByMove()
+    {
+        hero.GetComponent<HeroStatController>().ChangeEnergy(hero.GetComponent<HeroStatController>().GetMoveEP().GetActual() * -1);
+
     }
 }

@@ -17,6 +17,7 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
                      private RStatClass MoveSettings = new RStatClass(0, 6,2); //TODO - убрать константы в конструктор
+                     private RStatClass MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
     #endregion
 
     [SerializeField] private float RestoreEnergyEP = 0.015f;
@@ -82,6 +83,15 @@ public class HeroStatController : MonoBehaviour
     {
         MoveSettings.SetActual(value);
     }
+    public RStatClass GetMoveEP() { return MoveEP; }
+    public void SetMoveEP(float min, float max, float actual, float def)
+    {
+        MoveEP.SetMin(min);
+        MoveEP.SetMax(max);
+        MoveEP.SetActual(actual);
+        MoveEP.SetDef(def);
+    }
+
 
     public void DrawWaypoints()
     {

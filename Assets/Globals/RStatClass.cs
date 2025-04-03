@@ -1,3 +1,6 @@
+using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+//using System.Diagnostics;
 
 public class RStatClass
 {
@@ -51,4 +54,24 @@ public class RStatClass
         if (actual > max) { actual = max; }
         if (def < min || def < max) { def = actual; }
     }
+
+    
+    public float GetActualInPercentage()
+    {
+        //float value =  
+        float value = ((this.actual-this.min)*100)/(this.max-this.min);
+        Debug.Log("GetActualInPercentage: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + value.ToString());
+        return value;
+    }
+    public void SetActualByPercent(float percent) 
+    {
+        if (percent > 0)
+        {
+            this.actual = this.min + ((this.max - this.min) * percent) / 100;
+            Debug.Log("SetActualByPercent: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + percent.ToString());
+
+        }
+
+    }
+
 }
