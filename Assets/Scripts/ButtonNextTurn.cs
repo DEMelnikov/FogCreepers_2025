@@ -9,19 +9,25 @@ public class ButtonNextTurn : MonoBehaviour
     public delegate void OnNextTurn();
     public static event OnNextTurn onNextTurn;
     private float turnTimer=0;
+    private Countdown countdown;// = new Countdown
+
 
     private void Awake()
     {
-        turnTimer = TurnSecondsLimit;
+        //turnTimer = TurnSecondsLimit;
+        countdown = new Countdown(TurnSecondsLimit, false);
+
         //toggleAutoPause = GetComponent
     }
 
     private void Update()
     {
-        if (!IsPause.GetPauseState())
-        {         
-            if (turnTimer >= 0) { turnTimer -= Time.deltaTime; Debug.Log(turnTimer); } else { NextTurn(); }
-        }
+       if(countdown.UpdateCountdown())
+       {
+            NextTurn();
+       }
+        
+        //CountDown();
     }
 
     public void NextTurn()
@@ -48,5 +54,11 @@ public class ButtonNextTurn : MonoBehaviour
         }
     }
 
-
+    //private void CountDown()
+    //{
+    //    if (!IsPause.GetPauseState())
+    //    {
+    //        if (turnTimer >= 0) { turnTimer -= Time.deltaTime; } else { NextTurn(); }
+    //    }
+    //}
 }

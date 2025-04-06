@@ -7,15 +7,20 @@ public class FOWRemove : MonoBehaviour
 {
     private Tilemap tilemap;
 
+    [SerializeField] private float FoWRemoveTimer;
+
     //[SerializeField] private TileBase tileToSet;
     //[SerializeField] private TileBase tileToSet2;
     //private Camera mainCamera;
-    private int FOWClearRadius = 0;
+    [SerializeField]private int FOWClearRadius;
+    private Countdown FoWRemoveCounter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
+        FoWRemoveCounter = new Countdown(FoWRemoveTimer,false);
+
         //mainCamera = Camera.main;
     }
 
@@ -28,6 +33,11 @@ public class FOWRemove : MonoBehaviour
             //Vector3Int ClickCellPosition = tilemap.WorldToCell(ClickWorldPosition);
             //Debug.Log("tile Selected position" + ClickCellPosition);
 
+        }
+
+        if (FoWRemoveCounter.UpdateCountdown())
+        {
+            ClearFOW();
         }
     }
 
