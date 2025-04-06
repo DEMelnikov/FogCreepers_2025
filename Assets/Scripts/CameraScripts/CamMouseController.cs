@@ -8,10 +8,10 @@ public class CamMouseController : MonoBehaviour
 {
     private Camera cam;
     private Vector3 mousePosition;
-   [SerializeField] private bool block = false;
+    [SerializeField] private bool block = false;
 
     public LayerMask layerMask;
-    public GraphicRaycaster graphicRaycaster;
+    public GraphicRaycaster graphicRaycaster; //from UI canvas
     public EventSystem eventSystem;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

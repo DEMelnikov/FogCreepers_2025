@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Secondary
+    uniqueID: 3307413087
+    locked: 0
   - name: background
     uniqueID: 253218789
     locked: 0
@@ -53,6 +56,9 @@ TagManager:
     locked: 0
   - name: GroundUnits
     uniqueID: 2543890611
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 964080195
     locked: 0
   m_RenderingLayers:
   - Default

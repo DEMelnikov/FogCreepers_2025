@@ -11,12 +11,17 @@ public class TurnCounter : MonoBehaviour
     {
 
         TurnCounterText = GameObject.Find("TurnCounter").GetComponent<TMP_Text>();
-        //buttonqq.GetComponent<ButtonNextTurn>().
-        ButtonNextTurn.onNextTurn += CounterUp;
+        //ButtonNextTurn.onNextTurn += CounterUp;
 
-        //buttonqq.
+    }
 
-        //ButtonNextTurn.onNextTurn +=
+    private void Update()
+    {
+        if (!IsPause.GetPauseState())
+        {
+            TurnCounterText.SetText(TurnsCounter.GetTurnsCounter().ToString());
+        }
+            
     }
 
     private void CounterUp()
@@ -29,7 +34,7 @@ public class TurnCounter : MonoBehaviour
 
     private void OnDisable()
     {
-        ButtonNextTurn.onNextTurn -= CounterUp;
+        //ButtonNextTurn.onNextTurn -= CounterUp;
     }
 
 }

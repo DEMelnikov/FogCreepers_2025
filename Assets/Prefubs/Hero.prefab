@@ -184,8 +184,13 @@ MonoBehaviour:
   TargetWaypoint: {x: 0, y: 0}
   HaveWayPoint: 0
   NewWaypointRadius: 2
-  WayPointGhostPrefub: {fileID: 3468954378953056536, guid: f94e106f62c73174db235a168c2f7bdd, type: 3}
   WayPointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
+  MoveAllowed: 1
+  BaseSpeed: 2
+  SpeedEP: 0.01
+  RestoreEnergyEP: 0.015
+  TargetEnergyToRestore: 0.25
+  CriticalLevelEnergy: 0.1
 --- !u!114 &1437828032572152231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkAble: 0
+  UIPanels: {fileID: 0}
 --- !u!114 &654334179708581777
 MonoBehaviour:
   m_ObjectHideFlags: 0
