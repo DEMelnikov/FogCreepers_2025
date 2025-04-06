@@ -27,7 +27,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     [SerializeField] private string spriteName = "1";
 
 
-    #region Test
+    #region StateMaschine
     //StateMaschine block
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
@@ -53,7 +53,6 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         RestoreEnergy = new HeroStateRestoreEnergy(this, StateMaschine);
 
 
-       // ExporeRuneState = new HeroEploreRunesState(this, StateMaschine);
         StateMaschine.Initialize(IdleState);
         //StateMaschine.Initialize(ExporeRuneState);
 
@@ -89,7 +88,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         throw new System.NotImplementedException();
     }
 
-    public void Movehero(Vector2 velocity)
+    public void Movehero(Vector2 velocity) //toDelete
     {
         throw new System.NotImplementedException();
     }

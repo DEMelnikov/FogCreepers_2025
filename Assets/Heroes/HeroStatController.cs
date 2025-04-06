@@ -7,10 +7,11 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float maxEnergy = 100;
     [SerializeField] private float maxWill   = 100;
-    [SerializeField] private Vector2 TargetWaypoint = new Vector2();
+
 
     #region MovementStats
     [SerializeField] private bool HaveWayPoint = false;
+    [SerializeField] private Vector2 TargetWaypoint = new Vector2();
     [SerializeField] private float NewWaypointRadius = 2f;
     [SerializeField] private GameObject WayPointPrefub;
     [SerializeField] private bool MoveAllowed = true;

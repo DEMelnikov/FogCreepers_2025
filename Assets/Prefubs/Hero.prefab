@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1751076685
-  m_SortingLayer: 3
+  m_SortingLayerID: -1301787205
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7926600038972401099, guid: fba3737379c781e488d97a47bd3eac05, type: 3}
   m_Color: {r: 0.9245283, g: 0.08198643, b: 0.715125, a: 1}
@@ -181,8 +181,8 @@ MonoBehaviour:
   maxHealth: 100
   maxEnergy: 100
   maxWill: 100
-  TargetWaypoint: {x: 0, y: 0}
   HaveWayPoint: 0
+  TargetWaypoint: {x: 0, y: 0}
   NewWaypointRadius: 2
   WayPointPrefub: {fileID: 3468954378953056536, guid: 39aed2aa1c36ae74aacedb2063288258, type: 3}
   MoveAllowed: 1

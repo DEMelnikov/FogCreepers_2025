@@ -25,9 +25,9 @@ public class StatClass
             //actual += value;
             actual = min;
         }
-        else if ((actual += value) >= max)
+        else if ((actual += value) >= TempMax)
         {
-            actual = max;
+            actual = TempMax;
         }
         else
         {

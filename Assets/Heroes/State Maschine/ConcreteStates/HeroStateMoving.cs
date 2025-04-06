@@ -89,11 +89,12 @@ public class HeroStateMoving : HeroState
        
         if (hero.GetComponent<HeroStatController>().GetEnergy().GetPercent() <= hero.GetComponent<HeroStatController>().GetCriticalLevelEnergy())
         {
-
             base.hero.StateMaschine.ChangeState(base.hero.GetStateRestoreEnergy());
-
         }
+
     }
+
+
 
 
 }
