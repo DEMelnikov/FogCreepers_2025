@@ -6,7 +6,8 @@ public class EnemyStateMove : EnemyState
 
     public EnemyStateMove(Enemy enemy, StateMaschine StateMaschine) : base(enemy, StateMaschine)
     {
-        StopAtTurnEnd = false; 
+        StopAtTurnEnd = false;
+        //TurnsCounter.onNewTurn += OnNewTurn;
     }
 
     public bool StopAtTurnEnd { get => stopAtTurnEnd; set => stopAtTurnEnd = value; }
@@ -14,6 +15,7 @@ public class EnemyStateMove : EnemyState
     public override void EnterState()
     {
         Debug.Log("enter move State");
+        TurnsCounter.onNewTurn += OnNewTurn;
         ResetDestinaton();
         base.EnterState();
     }
@@ -24,8 +26,8 @@ public class EnemyStateMove : EnemyState
         {
             StopAtTurnEnd = false;
             enemy.GetComponent<EnemyMoveHandler>().SetHaveWaypoint(false);
+            TurnsCounter.onNewTurn -= OnNewTurn;
         }
-        base.ExitState();
     }
 
     public override void FrameUpdate()
@@ -72,4 +74,14 @@ public class EnemyStateMove : EnemyState
         base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().speed =
             enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActual();
     }
+
+    private void OnNewTurn()
+    {
+        if (StopAtTurnEnd)
+        {
+            base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().isStopped = true;
+            base.enemy.StateMaschine.ChangeState(enemy.IdleState);
+        }
+    }
+   
 }

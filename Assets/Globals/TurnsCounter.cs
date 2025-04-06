@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public static class TurnsCounter
 {
     //private static int turnsCounter;
+
+    public static Action onNewTurn;
 
     private static int turnsCounter;
 
@@ -14,5 +17,6 @@ public static class TurnsCounter
     public static void NewTurn()
     {
         turnsCounter++;
+        onNewTurn?.Invoke();
     }
 }
