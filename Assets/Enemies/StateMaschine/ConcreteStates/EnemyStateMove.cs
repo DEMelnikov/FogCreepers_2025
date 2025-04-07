@@ -72,7 +72,7 @@ public class EnemyStateMove : EnemyState
             enemy.GetComponent<EnemyMoveHandler>().GetTargetWaypoint();
 
         base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().speed =
-            enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActual();
+            enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActionActual();
     }
 
     private void OnNewTurn()

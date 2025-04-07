@@ -11,12 +11,12 @@ public class EnemyMoveHandler : MonoBehaviour
     [SerializeField] private bool MoveAllowed = true;
     [SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
-                     private RStatClass MoveSettings; // = new RStatClass(0, 6,2f ); //TODO - убрать константы в конструктор
-                     private RStatClass MoveEP;      
+    
     [SerializeField] private float spreadToSetTargetPoint = 15;
     [SerializeField] private float objectCloseRange = 2f;
     [SerializeField] private float heroCloseRange = 10f;
 
+    private ActionSettingsAndEP MoveSettings;
 
     private NavMeshAgent agent { get; set; }
 
@@ -38,19 +38,18 @@ public class EnemyMoveHandler : MonoBehaviour
     public bool GetMoveAllowed() {  return MoveAllowed; }
     public void SetMoveAllowed(bool value) { MoveAllowed = value; }
     public NavMeshAgent GetAgent() { return agent; }
-    public RStatClass GetMoveSettings() { return MoveSettings; }
-
-
-
-
+    public ActionSettingsAndEP GetMoveSettings() { return MoveSettings; }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        MoveSettings = new RStatClass(0, 6, 2f);
-        MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
+
+        RStatClass MoveParams = new RStatClass(0, 6, 2f);                //TODO - убрать константы в конструктор
+        RStatClass MovePrice  = new RStatClass(-0.005f, +0.03f, 0.01f);  //TODO - убрать константы в конструктор
+
+        MoveSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
     }
 
     void Start()

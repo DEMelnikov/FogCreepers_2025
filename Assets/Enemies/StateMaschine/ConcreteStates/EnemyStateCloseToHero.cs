@@ -78,6 +78,6 @@ public class EnemyStateCloseToHero : EnemyState
     {
         base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().destination = TargetHeroTransform.position;
         base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().speed =
-            enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActual();
+            enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActionActual();
     }
 }
