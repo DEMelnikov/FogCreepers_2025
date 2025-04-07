@@ -5,6 +5,7 @@ public class EnemyStateSearchTarget : EnemyState
 {
     private EnemyAggressionHandler enemyAggressionHandler;
 
+
     public EnemyStateSearchTarget(Enemy enemy, StateMaschine StateMaschine) : base(enemy, StateMaschine)
     {
         enemyAggressionHandler = enemy.GetComponent<EnemyAggressionHandler>();
@@ -37,6 +38,8 @@ public class EnemyStateSearchTarget : EnemyState
         if (VisualSearch())
         {
             Debug.Log("Visual COntact!!!");
+            GetTargetFromList();
+            this.enemy.StateMaschine.ChangeState(enemy.CloseToHero);
         }
         else
         {
@@ -60,5 +63,27 @@ public class EnemyStateSearchTarget : EnemyState
             return false;
         }
         else { return true; }
+    }
+
+    private void GetTargetFromList()
+    {
+        if (enemyAggressionHandler.CountHeroesInVisualContact() > 0)
+        {
+            if (enemyAggressionHandler.CountHeroesInVisualContact() > 1)
+            {
+                //TODO chose one in any method
+                
+                //TEMP:
+                Debug.Log("Get target hero");
+                base.enemy.GetComponent<EnemyAggressionHandler>().SetTargetHero(
+                    base.enemy.GetComponent<EnemyAggressionHandler>().GetFirstHeroFromVisualList());
+            }
+            else
+            {
+                Debug.Log("Get target hero");
+                base.enemy.GetComponent<EnemyAggressionHandler>().SetTargetHero(
+                    base.enemy.GetComponent<EnemyAggressionHandler>().GetFirstHeroFromVisualList());
+            }
+        }
     }
 }

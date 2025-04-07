@@ -71,7 +71,7 @@ public class RStatClass
             //Debug.Log("SetActualByPercent: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + percent.ToString());
 
         }
-
+        Debug.Log("SetActualByPercent input value " + percent + " result " + this.actual);
     }
 
 }

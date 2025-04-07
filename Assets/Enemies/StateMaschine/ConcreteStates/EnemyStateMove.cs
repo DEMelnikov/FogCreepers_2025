@@ -17,7 +17,6 @@ public class EnemyStateMove : EnemyState
         Debug.Log("enter move State");
         TurnsCounter.onNewTurn += OnNewTurn;
         ResetDestinaton();
-        base.EnterState();
     }
 
     public override void ExitState()
@@ -26,8 +25,8 @@ public class EnemyStateMove : EnemyState
         {
             StopAtTurnEnd = false;
             enemy.GetComponent<EnemyMoveHandler>().SetHaveWaypoint(false);
-            TurnsCounter.onNewTurn -= OnNewTurn;
         }
+        TurnsCounter.onNewTurn -= OnNewTurn;
     }
 
     public override void FrameUpdate()
@@ -42,7 +41,8 @@ public class EnemyStateMove : EnemyState
 
     public override void PhysicUpdate()
     {
-        if (base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().remainingDistance <= 2)
+        if (base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().remainingDistance <=
+            base.enemy.GetComponent<EnemyMoveHandler>().ObjectCloseRange)
         {
             base.enemy.GetComponent<EnemyMoveHandler>().WaypointReached();
             base.enemy.StateMaschine.ChangeState(enemy.IdleState);

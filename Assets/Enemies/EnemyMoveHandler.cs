@@ -6,18 +6,24 @@ public class EnemyMoveHandler : MonoBehaviour
     #region MovementStats
     [SerializeField] private bool HaveWayPoint = false;
     [SerializeField] private Vector2 TargetWaypoint = new Vector2();
-    [SerializeField] private float NewWaypointRadius = 2f;
+    //[SerializeField] private float NewWaypointRadius = 2f;
     //[SerializeField] private GameObject WayPointPrefub;
     [SerializeField] private bool MoveAllowed = true;
     [SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
-                     private RStatClass MoveSettings = new RStatClass(0, 6,2f ); //TODO - убрать константы в конструктор
-                     private RStatClass MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
+                     private RStatClass MoveSettings; // = new RStatClass(0, 6,2f ); //TODO - убрать константы в конструктор
+                     private RStatClass MoveEP;      
     [SerializeField] private float spreadToSetTargetPoint = 15;
+    [SerializeField] private float objectCloseRange = 2f;
+    [SerializeField] private float heroCloseRange = 10f;
+
 
     private NavMeshAgent agent { get; set; }
+
     #endregion
 
+    public float HeroCloseRange { get => heroCloseRange; set => heroCloseRange = value; }
+    public float ObjectCloseRange { get => objectCloseRange; set => objectCloseRange = value; }
 
     public bool GetHaveWayPoint() { return HaveWayPoint; }
     public void SetHaveWaypoint(bool value) { HaveWayPoint = value; }
@@ -43,6 +49,8 @@ public class EnemyMoveHandler : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        MoveSettings = new RStatClass(0, 6, 2f);
+        MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
     }
 
     void Start()

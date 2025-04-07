@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public EnemyStateIdle IdleState { get; set; }
     public EnemyStateMove MoveState { get; set; }
     public EnemyStateSearchTarget SerachTargetState { get; set; }
+    public EnemyStateCloseToHero CloseToHero { get; set; }
     //private HeroStateRestoreEnergy RestoreEnergy { get; set; }
 
     //
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
         IdleState = new EnemyStateIdle (this, StateMaschine);
         MoveState = new EnemyStateMove(this, StateMaschine);
         SerachTargetState = new EnemyStateSearchTarget (this, StateMaschine);
+        CloseToHero = new EnemyStateCloseToHero (this, StateMaschine);
 
 
         StateMaschine.Initialize(IdleState);

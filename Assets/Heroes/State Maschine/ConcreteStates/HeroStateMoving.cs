@@ -57,9 +57,9 @@ public class HeroStateMoving : HeroState
             {
                 base.hero.GetAgent().isStopped = false;
 
-                Debug.Log("Update - Hero's moving " + base.hero.name + " Speed: " + base.hero.GetAgent().speed
-                     + " Distance: " + base.hero.GetAgent().remainingDistance.ToString()+" Aloowed "+
-                     hero.GetComponent<HeroStatController>().GetMoveAllowed().ToString());
+                //Debug.Log("Update - Hero's moving " + base.hero.name + " Speed: " + base.hero.GetAgent().speed
+                //     + " Distance: " + base.hero.GetAgent().remainingDistance.ToString()+" Aloowed "+
+                //     hero.GetComponent<HeroStatController>().GetMoveAllowed().ToString());
 
                 UpdateEnergyByMove();
             }
