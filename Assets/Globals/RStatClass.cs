@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 //using System.Diagnostics;
@@ -67,11 +69,12 @@ public class RStatClass
     {
         if (percent > 0)
         {
-            this.actual = this.min + ((this.max - this.min) * percent) / 100;
+            this.actual = this.min + ((this.max - this.min) * percent);
             //Debug.Log("SetActualByPercent: min=" + this.min + " max=" + this.max + " actual=" + this.actual + " percentage:" + percent.ToString());
 
         }
         Debug.Log("SetActualByPercent input value " + percent + " result " + this.actual);
+        
     }
 
 }
