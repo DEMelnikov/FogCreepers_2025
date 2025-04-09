@@ -14,10 +14,12 @@ public class EnemyStateCharge : EnemyState
     {
         Debug.Log(base.enemy.name + " Enter State Charge");
 
-        if (base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform != null)
+        if (base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform == null)
         {
-            TargetHeroTransform = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform;
+            base.enemy.StateMaschine.ChangeState(enemy.IdleState);
         }
+
+        TargetHeroTransform = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform;
 
         enemyMoveHandler = base.enemy.GetComponent<EnemyMoveHandler>();
 
@@ -53,6 +55,24 @@ public class EnemyStateCharge : EnemyState
 
             Debug.Log("Attack!!! distance = " + enemyMoveHandler.GetAgent().remainingDistance + " Speed = "+
                 enemy.GetComponent<EnemyMoveHandler>().GetMoveSettings().GetActionActual());
+
+            float attackRoll = enemy.GetAttack().Charge();
+            Debug.Log("Attack roll = " + attackRoll);
+            float defRoll = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().
+                GetComponent<Hero>().GetDefence().DefaultDefence();
+            Debug.Log("Defence roll = " + defRoll);
+
+            if (attackRoll > defRoll)
+            {
+                Debug.Log("Success attack");
+            }
+            else 
+            {
+                Debug.Log("Unsuccess attack");
+            }
+
+            base.enemy.StateMaschine.ChangeState(enemy.RegularAttackState);
+
             //TODO - > to Attack State
 
             //base.enemy.GetComponent<EnemyMoveHandler>().WaypointReached();

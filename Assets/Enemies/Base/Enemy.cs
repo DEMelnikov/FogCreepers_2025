@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent { get; set; }
     private Transform position { get; set; }
+    private Attack attack;
 
     #region StateMaschine
     //StateMaschine block
@@ -15,10 +16,26 @@ public class Enemy : MonoBehaviour
     public EnemyStateSearchTarget SerachTargetState { get; set; }
     public EnemyStateCloseToHero CloseToHero { get; set; }
     public EnemyStateCharge ChargeState { get; set; }
-    //private HeroStateRestoreEnergy RestoreEnergy { get; set; }
+    public EnemyStateAttackRegular RegularAttackState { get; set; }
 
-    //
+    //private HeroStateRestoreEnergy RestoreEnergy { get; set; }
     #endregion
+
+    #region MainStats
+    private Skill strenght;
+    private Skill dexterity;
+    #endregion
+
+    #region SecondarySkills
+        private Skill chargeSkill;
+        private Skill attackSkill;
+    #endregion
+
+
+    public Skill Strenght { get => strenght; set => strenght = value; }
+    public Skill Dexterity { get => dexterity; set => dexterity = value; }
+    public Skill ChargeSkill { get => chargeSkill; set => chargeSkill = value; }
+    public Skill AttackSkill { get => attackSkill; set => attackSkill = value; }
 
     private void Awake()
     {
@@ -26,12 +43,24 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        StateMaschine = new StateMaschine();
-        IdleState = new EnemyStateIdle (this, StateMaschine);
-        MoveState = new EnemyStateMove(this, StateMaschine);
-        SerachTargetState = new EnemyStateSearchTarget (this, StateMaschine);
-        CloseToHero = new EnemyStateCloseToHero (this, StateMaschine);
-        ChargeState = new EnemyStateCharge (this, StateMaschine);
+
+
+        float randomStat = Random.Range(0.5f, 3f);
+        strenght = new Skill(randomStat);
+        //randomStat = Random.Range(0.5f, 3f);
+        chargeSkill = new Skill(Random.Range(0.5f, 3f));
+        attackSkill = new Skill(Random.Range(0, 2f));
+
+        attack = new Attack(this);
+
+
+        StateMaschine      = new StateMaschine();
+        IdleState          = new EnemyStateIdle (this, StateMaschine);
+        MoveState          = new EnemyStateMove(this, StateMaschine);
+        SerachTargetState  = new EnemyStateSearchTarget (this, StateMaschine);
+        CloseToHero        = new EnemyStateCloseToHero (this, StateMaschine);
+        ChargeState        = new EnemyStateCharge (this, StateMaschine);
+        RegularAttackState = new EnemyStateAttackRegular(this, StateMaschine);
 
         StateMaschine.Initialize(IdleState);
     }
@@ -52,4 +81,6 @@ public class Enemy : MonoBehaviour
     {
         StateMaschine.CurrentState.PhysicUpdate();
     }
+
+    public Attack GetAttack() {  return attack; }
 }

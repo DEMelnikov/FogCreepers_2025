@@ -14,7 +14,6 @@ public class EnemyStateSearchTarget : EnemyState
     public override void EnterState()
     {
         Debug.Log("Start to search heroes");
-        base.EnterState();
     }
 
     public override void ExitState()

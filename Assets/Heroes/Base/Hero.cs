@@ -34,16 +34,18 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     private HeroStateMoving MoveState { get; set; }
     private HeroStateRestoreEnergy RestoreEnergy { get; set; }
 
-    //
     #endregion
+
+    #region Skills
+    private Skill defaultDefence;
+    #endregion
+
+    private Defence defence;
 
     public event Action<Hero> HeroSelected;
 
-    private Hero()
-    {
 
-
-    }
+    public Skill DefaultDefence { get => defaultDefence; set => defaultDefence = value; }
 
     private void Awake()
     {
@@ -52,6 +54,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         MoveState = new HeroStateMoving(this, StateMaschine);
         RestoreEnergy = new HeroStateRestoreEnergy(this, StateMaschine);
 
+        defence = new Defence(this);
+        defaultDefence = new Skill(10); //
 
         StateMaschine.Initialize(IdleState);
         //StateMaschine.Initialize(ExporeRuneState);
@@ -156,6 +160,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         this.GetComponent<HeroStatController>().DrawWaypoints();
         HeroSelected?.Invoke(this);
     }
+
+    public Defence GetDefence() {  return defence; }
 
     public enum AnimationTriggerType
     {

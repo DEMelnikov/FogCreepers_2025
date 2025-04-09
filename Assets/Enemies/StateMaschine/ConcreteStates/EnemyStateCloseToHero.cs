@@ -13,10 +13,11 @@ public class EnemyStateCloseToHero : EnemyState
     public override void EnterState()
     {
         Debug.Log(base.enemy.name + " Enter State Close to hero");
-        if (base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform != null)
+        if (base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform == null)
         {
-            TargetHeroTransform = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform;
+            enemy.StateMaschine.ChangeState(enemy.IdleState);
         }
+        TargetHeroTransform = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform;
         UpdateDestination();
     }
 
@@ -41,6 +42,7 @@ public class EnemyStateCloseToHero : EnemyState
     public override void PhysicUpdate()
     {
         UpdateDestination();
+
         if (base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().remainingDistance <=
                  base.enemy.GetComponent<EnemyAggressionHandler>().ChargeDistance)
         {
@@ -58,6 +60,7 @@ public class EnemyStateCloseToHero : EnemyState
         if (IsPause.GetPauseState())
         {
             base.enemy.GetComponent<EnemyMoveHandler>().GetAgent().isStopped = true;
+            return;
         }
         else
         {

@@ -12,6 +12,8 @@ public class EnemyAggressionHandler : MonoBehaviour
     [SerializeField] private float attackDistance = 2f;
                      private bool isAble2Charge = true;
     [SerializeField] private float chargeDistance = 10f;
+
+    private ActionSettingsAndEP RegularAttackSettings;
     //[SerializeField] private float chargeENergyLimit = 0.66f;
 
 
@@ -23,8 +25,20 @@ public class EnemyAggressionHandler : MonoBehaviour
     public void SetTargetHero(GameObject target) { taregetHero =  target; }
     public GameObject GetTargetHero() { return taregetHero; }
 
+    public ActionSettingsAndEP GetRegularAttackSrttings() {  return RegularAttackSettings; }
+
     public float GetRaiusVisualSearch() {  return RadiusVisualSearch; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+    private void Awake()
+    {
+        RegularAttackSettings = new ActionSettingsAndEP(
+            new RStatClass(0, 6, 3f),
+            new RStatClass(0, 6, 5f)
+            );
+    }
+
     void Start()
     {
         

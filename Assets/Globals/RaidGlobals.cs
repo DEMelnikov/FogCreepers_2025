@@ -3,6 +3,7 @@ using UnityEngine;
 public static class RaidGlobals
 {
     private static GameObject SelectedObject;
+    private static float defRoll = 20;
 
     public static void SetSelectedObject(GameObject newObject) {  SelectedObject = newObject; }
     public static GameObject GetSelectedObject() { return SelectedObject; }
@@ -16,7 +17,11 @@ public static class RaidGlobals
             }
         }
         return false;
+    }
 
+    public static float RollDefaultDicePlusX(float x)
+    {
+        return Random.Range(0,defRoll+x);
     }
     
 }

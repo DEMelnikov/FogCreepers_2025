@@ -34,7 +34,6 @@ public class EnemyStateIdle : EnemyState
 
     public override void PhysicUpdate()
     {
-
         if (IsReadyToMove()) 
         { 
             //enemy.StateMaschine.ChangeState(enemy.MoveState); 
@@ -43,8 +42,6 @@ public class EnemyStateIdle : EnemyState
         {
             enemy.StateMaschine.ChangeState(enemy.SerachTargetState);
         }
-
-            base.PhysicUpdate();
     }
 
     private bool IsReadyToMove()
@@ -52,8 +49,7 @@ public class EnemyStateIdle : EnemyState
        if (enemyMoveHandler.GetHaveWayPoint() && enemyMoveHandler.GetMoveAllowed())
        {
             return true;
-       }        
-        
+       }         
         return false;
     }
 
