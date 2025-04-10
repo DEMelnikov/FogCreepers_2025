@@ -24,6 +24,11 @@ public class SliderData : MonoBehaviour
         Object.transform.GetComponent<Slider>().value = values.GetPercent();
     }
 
+    //public void SetLabel(StatClass values) 
+    //{
+        
+    //}
+
 
 
 

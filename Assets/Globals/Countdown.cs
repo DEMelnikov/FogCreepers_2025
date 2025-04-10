@@ -48,4 +48,10 @@ public class Countdown
     {
         stopAfterTrigger = false;
     }
+
+    public float GetTimeLeft()
+    {
+        return countdown/timeLimit;
+    }
+
 }

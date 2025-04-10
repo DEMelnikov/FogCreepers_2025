@@ -1,12 +1,17 @@
+using System;
+using System.IO;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.AI;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent { get; set; }
     private Transform position { get; set; }
     private Attack attack;
+    private EnemyAggressionHandler eAggressionHandler;
+    private EStatHandler eStatHandler;
 
     #region StateMaschine
     //StateMaschine block
@@ -31,6 +36,11 @@ public class Enemy : MonoBehaviour
         private Skill attackSkill;
     #endregion
 
+                     private string path = "Avatars/bestiary/";
+    [SerializeField] private string spriteName = "M1";
+                     private string monsterName = "Sceleton";
+
+    public event Action<Enemy> EnemySelected;
 
     public Skill Strenght { get => strenght; set => strenght = value; }
     public Skill Dexterity { get => dexterity; set => dexterity = value; }
@@ -43,13 +53,16 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        eAggressionHandler = this.GetComponent<EnemyAggressionHandler>();
+        eStatHandler = this.GetComponent<EStatHandler>();
 
 
-        float randomStat = Random.Range(0.5f, 3f);
+
+        float randomStat = UnityEngine.Random.Range(0.5f, 3f);
         strenght = new Skill(randomStat);
         //randomStat = Random.Range(0.5f, 3f);
-        chargeSkill = new Skill(Random.Range(0.5f, 3f));
-        attackSkill = new Skill(Random.Range(0, 2f));
+        chargeSkill = new Skill(UnityEngine.Random.Range(0.5f, 3f));
+        attackSkill = new Skill(UnityEngine.Random.Range(0, 2f));
 
         attack = new Attack(this);
 
@@ -83,4 +96,18 @@ public class Enemy : MonoBehaviour
     }
 
     public Attack GetAttack() {  return attack; }
+    public EnemyAggressionHandler GetEAggressionHandler() { return eAggressionHandler; }
+    public EStatHandler GetEStatHandler() { return eStatHandler; }  
+
+    private void OnMouseDown()
+    {
+        RaidGlobals.SetSelectedObject(this.gameObject);
+        //this.GetHeroStats().DrawWaypoints();
+        EnemySelected?.Invoke(this);
+    }
+
+    public string GetAvatarSprite() { return path + spriteName; }
+    public string GetMonsterName() { return monsterName; }
+
+
 }

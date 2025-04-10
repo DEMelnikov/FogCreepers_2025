@@ -14,12 +14,12 @@ public class EnemyStateCharge : EnemyState
     {
         Debug.Log(base.enemy.name + " Enter State Charge");
 
-        if (base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform == null)
+        if (base.enemy.GetEAggressionHandler().GetTargetHero().transform == null)
         {
             base.enemy.StateMaschine.ChangeState(enemy.IdleState);
         }
 
-        TargetHeroTransform = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().transform;
+        TargetHeroTransform = base.enemy.GetEAggressionHandler().GetTargetHero().transform;
 
         enemyMoveHandler = base.enemy.GetComponent<EnemyMoveHandler>();
 
@@ -49,7 +49,7 @@ public class EnemyStateCharge : EnemyState
     {
         UpdateDestination();
         if (enemyMoveHandler.GetAgent().remainingDistance <= 
-            base.enemy.GetComponent<EnemyAggressionHandler>().AttackDistance)
+            base.enemy.GetEAggressionHandler().AttackDistance)
         {
             enemyMoveHandler.GetAgent().isStopped = true;
 
@@ -58,7 +58,7 @@ public class EnemyStateCharge : EnemyState
 
             float attackRoll = enemy.GetAttack().Charge();
             Debug.Log("Attack roll = " + attackRoll);
-            float defRoll = base.enemy.GetComponent<EnemyAggressionHandler>().GetTargetHero().
+            float defRoll = base.enemy.GetEAggressionHandler().GetTargetHero().
                 GetComponent<Hero>().GetDefence().DefaultDefence();
             Debug.Log("Defence roll = " + defRoll);
 

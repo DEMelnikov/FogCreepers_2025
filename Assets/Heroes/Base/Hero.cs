@@ -163,7 +163,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     {
         //GameObject testObject = this.gameObject;
         RaidGlobals.SetSelectedObject(this.gameObject);
-        this.GetComponent<HeroStatController>().DrawWaypoints();
+        this.GetHeroStats().DrawWaypoints();
         HeroSelected?.Invoke(this);
     }
 

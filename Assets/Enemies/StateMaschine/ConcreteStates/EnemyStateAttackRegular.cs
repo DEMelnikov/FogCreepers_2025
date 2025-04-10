@@ -77,4 +77,11 @@ public class EnemyStateAttackRegular : EnemyState
         }
 
     }
+
+    public float GetCountdownLeft()
+    {
+        return attackCountdown.GetTimeLeft();
+    }
+
+
 }

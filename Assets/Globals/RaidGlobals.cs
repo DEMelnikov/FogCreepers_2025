@@ -19,6 +19,18 @@ public static class RaidGlobals
         return false;
     }
 
+    public static bool SelectedObjectIsEnemy()
+    {
+        if (SelectedObject != null)
+        {
+            if (SelectedObject.tag == "Monster")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static float RollDefaultDicePlusX(float x)
     {
         return Random.Range(0,defRoll+x);

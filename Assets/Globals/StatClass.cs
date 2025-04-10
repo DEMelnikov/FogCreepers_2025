@@ -7,6 +7,8 @@ public class StatClass
         this.min = min;
         this.max = max;
         this.actual = actual;
+        if (actual > max) {this.actual = max; }
+        if (actual < min) {this.actual = min; }            
         this.tempmax= tempMax;
     }
 
