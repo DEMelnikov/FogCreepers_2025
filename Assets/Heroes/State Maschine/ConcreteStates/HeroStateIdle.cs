@@ -41,11 +41,13 @@ public class HeroStateIdle : HeroState
 
         if (!IsPause.GetPauseState())
         {
-            hero.GetComponent<HeroStatController>().ChangeEnergy(
+            //hero.GetComponent<HeroStatController>().ChangeEnergy(
+            //    hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
+            hero.GetHeroStats().ChangeEnergy(
                 hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
         }
 
-            base.PhysicUpdate();
+        base.PhysicUpdate();
     }
 
     private bool IsReadyToMove()

@@ -11,6 +11,9 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     public Rigidbody2D RB { get ; set; }
     public bool IsFacingRight { get; set; }
     public bool IsFacingUp { get; set; }
+    private HeroStatController statsH { get; set; }
+    //public float DefaultVelocity { get; set; }    
+    //protected float distanceToChangeGoal { get; set; }
     //public float DefaultVelocity { get; set; }    
     //protected float distanceToChangeGoal { get; set; }
 
@@ -53,6 +56,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         IdleState = new HeroStateIdle(this, StateMaschine);
         MoveState = new HeroStateMoving(this, StateMaschine);
         RestoreEnergy = new HeroStateRestoreEnergy(this, StateMaschine);
+
+        statsH = this.GetComponent<HeroStatController>();
 
         defence = new Defence(this);
         defaultDefence = new Skill(10); //
@@ -110,6 +115,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     }
 
     //public void ChangeActualVelocity (float newVelocity)   { ActualVelocity = newVelocity; }
+    public HeroStatController GetHeroStats() { return statsH; }
     public bool GetIsFacingRight () { return IsFacingRight; }
     public void SetIsFacingRight(bool newBool) {IsFacingRight = newBool; }
     public bool GetIsFacingUp() { return IsFacingUp; }
