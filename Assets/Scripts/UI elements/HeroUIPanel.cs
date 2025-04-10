@@ -30,14 +30,14 @@ public class HeroUIPanel : MonoBehaviour
             if (hero.tag == "Hero")
             {
                 //Debug.Log("Yeah u are krasavcheg");
-                HealthSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetHealth());
-                HealthSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetHealth());
+                HealthSlider.GetComponent<SliderData>().SetMaxValue(hero.GetHeroStats().GetHealth());
+                HealthSlider.GetComponent<SliderData>().SetSlider(hero.GetHeroStats().GetHealth());
 
-                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetEnergy());
-                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetHeroStats().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetHeroStats().GetEnergy());
 
-                WillSlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetWill());
-                WillSlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetWill());
+                WillSlider.GetComponent<SliderData>().SetMaxValue(hero.GetHeroStats().GetWill());
+                WillSlider.GetComponent<SliderData>().SetSlider(hero.GetHeroStats().GetWill());
             }
         }
     }
@@ -50,8 +50,8 @@ public class HeroUIPanel : MonoBehaviour
 
             if (hero.tag == "Hero")
             {               
-                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetComponent<HeroStatController>().GetEnergy());
-                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetComponent<HeroStatController>().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetMaxValue(hero.GetHeroStats().GetEnergy());
+                EnergySlider.GetComponent<SliderData>().SetSlider(hero.GetHeroStats().GetEnergy());
             }
         }
     }

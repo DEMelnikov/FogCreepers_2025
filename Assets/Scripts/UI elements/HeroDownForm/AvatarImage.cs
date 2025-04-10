@@ -29,6 +29,6 @@ public class AvatarImage : MonoBehaviour
         }
 
         this.transform.Find("AvatarName").gameObject.GetComponent<TMP_Text>().SetText(
-             hero.GetComponent<HeroStatController>().GetHeroName());
+             hero.GetHeroStats().GetHeroName());
     }
 }

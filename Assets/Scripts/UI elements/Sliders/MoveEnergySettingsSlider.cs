@@ -16,7 +16,7 @@ public class MoveEnergySettingsSlider : MonoBehaviour
 
             if (hero.tag == "Hero")
             {
-                RStatClass moveSettings = hero.GetComponent<HeroStatController>().GetMoveSettings();
+                RStatClass moveSettings = hero.GetHeroStats().GetMoveSettings();
                 this.GetComponent<Slider>().minValue = moveSettings.GetMin();
                 this.GetComponent<Slider>().maxValue = moveSettings.GetMax();
                 this.GetComponent<Slider>().value = moveSettings.GetActual();
@@ -32,14 +32,14 @@ public class MoveEnergySettingsSlider : MonoBehaviour
 
             if (hero.tag == "Hero")
             {
-                hero.GetComponent<HeroStatController>().SetMoveSettingsActual(this.GetComponent<Slider>().value);
-                hero.GetComponent<HeroStatController>().GetMoveEP().SetActualByPercent(
-                  hero.GetComponent<HeroStatController>().GetMoveSettings().GetActualInPercentage());
+                hero.GetHeroStats().SetMoveSettingsActual(this.GetComponent<Slider>().value);
+                hero.GetHeroStats().GetMoveEP().SetActualByPercent(
+                  hero.GetHeroStats().GetMoveSettings().GetActualInPercentage());
 
                 EPTextUI.GetComponent<TMP_Text>().SetText("EP: "+ 
-                    hero.GetComponent<HeroStatController>().GetMoveEP().GetActualInPercentage().ToString()
+                    hero.GetHeroStats().GetMoveEP().GetActualInPercentage().ToString()
                     + " value: " +
-                    hero.GetComponent<HeroStatController>().GetMoveEP().GetActual().ToString());
+                    hero.GetHeroStats().GetMoveEP().GetActual().ToString());
 
                 //hero.GetComponent<HeroStatController>().SetMoveSettings()
                 //this.GetComponent<Slider>().minValue = moveSettings.GetMin();

@@ -36,11 +36,11 @@ public class HeroStateRestoreEnergy : HeroState
     {
         if (!IsPause.GetPauseState())
         {
-            hero.GetComponent<HeroStatController>().ChangeEnergy(
-                hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
+            hero.GetHeroStats().ChangeEnergy(
+                hero.GetHeroStats().GetRestoreEnergyEP());
 
-            if (hero.GetComponent<HeroStatController>().GetEnergy().GetPercent() >
-                hero.GetComponent<HeroStatController>().GetTargetEnergyToRestore())
+            if (hero.GetHeroStats().GetEnergy().GetPercent() >
+                hero.GetHeroStats().GetTargetEnergyToRestore())
             {
                 base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
             }

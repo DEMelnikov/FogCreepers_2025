@@ -44,7 +44,7 @@ public class HeroStateIdle : HeroState
             //hero.GetComponent<HeroStatController>().ChangeEnergy(
             //    hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
             hero.GetHeroStats().ChangeEnergy(
-                hero.GetComponent<HeroStatController>().GetRestoreEnergyEP());
+                hero.GetHeroStats().GetRestoreEnergyEP());
         }
 
         base.PhysicUpdate();
@@ -52,7 +52,7 @@ public class HeroStateIdle : HeroState
 
     private bool IsReadyToMove()
     {
-        if (base.hero.GetComponent<HeroStatController>().GetHaveWaypoint()) {return true;}
+        if (base.hero.GetHeroStats().GetHaveWaypoint()) {return true;}
         return false;
     }
 }

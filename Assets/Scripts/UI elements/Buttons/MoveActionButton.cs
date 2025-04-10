@@ -11,7 +11,7 @@ public class MoveActionButton : MonoBehaviour
 
             if (hero != null && hero.tag == "Hero")
             {
-                if (hero.GetComponent<HeroStatController>().GetMoveAllowed())
+                if (hero.GetHeroStats().GetMoveAllowed())
                 {
                     this.gameObject.GetComponentInChildren<Button>().interactable = true;
                     this.gameObject.GetComponentInChildren<Toggle>().isOn = true;

@@ -42,7 +42,7 @@ public class HeroStateMoving : HeroState
 
         if (base.hero.GetAgent().remainingDistance <= 2)
         {
-            base.hero.GetComponent<HeroStatController>().WaypointReached();
+            base.hero.GetHeroStats().WaypointReached();
             base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
         }
 
@@ -53,7 +53,7 @@ public class HeroStateMoving : HeroState
         }
         else
         {
-            if (hero.GetComponent<HeroStatController>().GetMoveAllowed())
+            if (hero.GetHeroStats().GetMoveAllowed())
             {
                 base.hero.GetAgent().isStopped = false;
 
@@ -74,20 +74,20 @@ public class HeroStateMoving : HeroState
 
     public void ResetDestinaton()
     {
-        base.hero.GetAgent().destination = base.hero.GetComponent<HeroStatController>().GetTargetWaypoint();
-        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetMoveSettings().GetActual();
+        base.hero.GetAgent().destination = base.hero.GetHeroStats().GetTargetWaypoint();
+        base.hero.GetAgent().speed = base.hero.GetHeroStats().GetMoveSettings().GetActual();
     }
 
     public void UpdateSpeed()
     {
-        base.hero.GetAgent().speed = base.hero.GetComponent<HeroStatController>().GetMoveSettings().GetActual();
+        base.hero.GetAgent().speed = base.hero.GetHeroStats().GetMoveSettings().GetActual();
     }
 
     public void UpdateEnergyByMove()
     {
-        hero.GetComponent<HeroStatController>().ChangeEnergy(hero.GetComponent<HeroStatController>().GetMoveEP().GetActual() * -1);
+        hero.GetHeroStats().ChangeEnergy(hero.GetHeroStats().GetMoveEP().GetActual() * -1);
        
-        if (hero.GetComponent<HeroStatController>().GetEnergy().GetPercent() <= hero.GetComponent<HeroStatController>().GetCriticalLevelEnergy())
+        if (hero.GetHeroStats().GetEnergy().GetPercent() <= hero.GetHeroStats().GetCriticalLevelEnergy())
         {
             base.hero.StateMaschine.ChangeState(base.hero.GetStateRestoreEnergy());
         }
