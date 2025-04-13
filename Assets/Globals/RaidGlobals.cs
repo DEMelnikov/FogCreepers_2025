@@ -5,13 +5,25 @@ public static class RaidGlobals
     private static GameObject SelectedObject;
     private static float defRoll = 20;
 
+    private static GameObject fightPanel;
+    private static GameObject movePanel;
+
+    static  RaidGlobals()
+    {
+        fightPanel = GameObject.Find("FightPanel");
+        movePanel  = GameObject.Find("MoveSettings");
+        DisableHeroPannels();
+    }
+
     public static void SetSelectedObject(GameObject newObject) 
     { 
         SelectedObject = newObject;
         if (SelectedObjectIsEnemy())
         {
-            GameObject.Find("FightPanel").SetActive(false);
-            GameObject.Find("MoveSettings").SetActive(false);
+            DisableHeroPannels();
+            //movePanel.SetActive(false); 
+            //GameObject.Find("FightPanel").SetActive(false);
+            //GameObject.Find("MoveSettings").SetActive(false);
         }
     }
     public static GameObject GetSelectedObject() { return SelectedObject; }
@@ -42,6 +54,12 @@ public static class RaidGlobals
     public static float RollDefaultDicePlusX(float x)
     {
         return Random.Range(0,defRoll+x);
+    }
+
+    public static void DisableHeroPannels()
+    {
+        if (fightPanel.activeSelf) { fightPanel.SetActive(false); }
+        if (movePanel.activeSelf) { movePanel.SetActive(false); }
     }
     
 }
