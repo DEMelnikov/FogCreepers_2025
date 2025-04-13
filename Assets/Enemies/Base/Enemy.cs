@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private Attack attack;
     private EnemyAggressionHandler eAggressionHandler;
     private EStatHandler eStatHandler;
+    private GameObject iconSprite;
 
     #region StateMaschine
     //StateMaschine block
@@ -55,6 +56,8 @@ public class Enemy : MonoBehaviour
 
         eAggressionHandler = this.GetComponent<EnemyAggressionHandler>();
         eStatHandler = this.GetComponent<EStatHandler>();
+        iconSprite = this.gameObject.transform.Find("Icon").gameObject;
+        iconSprite.SetActive(false);
 
 
 
@@ -103,11 +106,14 @@ public class Enemy : MonoBehaviour
     {
         RaidGlobals.SetSelectedObject(this.gameObject);
         //this.GetHeroStats().DrawWaypoints();
+
         EnemySelected?.Invoke(this);
     }
 
     public string GetAvatarSprite() { return path + spriteName; }
     public string GetMonsterName() { return monsterName; }
 
-
+    public void EnableIcon()  {iconSprite.SetActive(true);}
+    public void DisableIcon() {iconSprite.SetActive(false);}
+    
 }

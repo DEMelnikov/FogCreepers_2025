@@ -9,7 +9,7 @@ public class EnemyMoveHandler : MonoBehaviour
     //[SerializeField] private float NewWaypointRadius = 2f;
     //[SerializeField] private GameObject WayPointPrefub;
     [SerializeField] private bool MoveAllowed = true;
-    [SerializeField] private float BaseSpeed = 2f;
+    //[SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
     
     [SerializeField] private float spreadToSetTargetPoint = 15;

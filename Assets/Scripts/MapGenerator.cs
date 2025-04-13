@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] int MapSize = 400;
+    //[SerializeField] int MapSize = 400;
     [SerializeField] private TileBase tileToSet;
     [SerializeField] private Tilemap backgroundTilemap;
 

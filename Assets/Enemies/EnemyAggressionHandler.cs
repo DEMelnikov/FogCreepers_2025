@@ -14,6 +14,8 @@ public class EnemyAggressionHandler : MonoBehaviour
     [SerializeField] private float chargeDistance = 10f;
 
     private ActionSettingsAndEP RegularAttackSettings;
+    private CollectionWithTag visibleHeroes;
+
     //[SerializeField] private float chargeENergyLimit = 0.66f;
 
 
@@ -28,6 +30,7 @@ public class EnemyAggressionHandler : MonoBehaviour
     public ActionSettingsAndEP GetRegularAttackSrttings() {  return RegularAttackSettings; }
 
     public float GetRaiusVisualSearch() {  return RadiusVisualSearch; }
+    public CollectionWithTag GetVisibleHeroes() { return visibleHeroes; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -35,8 +38,9 @@ public class EnemyAggressionHandler : MonoBehaviour
     {
         RegularAttackSettings = new ActionSettingsAndEP(
             new RStatClass(0, 6, 3f),
-            new RStatClass(0, 6, 5f)
-            );
+            new RStatClass(0, 6, 5f));
+
+        visibleHeroes = new CollectionWithTag("Hero", RadiusVisualSearch);
     }
 
     void Start()

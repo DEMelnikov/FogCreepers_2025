@@ -5,13 +5,18 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
+using static Unity.Collections.AllocatorManager;
+using static UnityEditorInternal.ReorderableList;
+using static UnityEngine.UI.Image;
 
 public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 {
     public Rigidbody2D RB { get ; set; }
+         private Camera cam;
     public bool IsFacingRight { get; set; }
     public bool IsFacingUp { get; set; }
     private HeroStatController statsH { get; set; }
+    private hAgressionController agressionController;
     //public float DefaultVelocity { get; set; }    
     //protected float distanceToChangeGoal { get; set; }
     //public float DefaultVelocity { get; set; }    
@@ -58,6 +63,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         RestoreEnergy = new HeroStateRestoreEnergy(this, StateMaschine);
 
         statsH = this.GetComponent<HeroStatController>();
+        agressionController = this.GetComponent<hAgressionController>();    
 
         defence = new Defence(this);
         defaultDefence = new Skill(10); //
@@ -69,6 +75,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         //Vector2 point = new Vector3(100, 100);
 
@@ -104,7 +112,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 
     void Start()
     {
-        
+         //cam = GetComponent<Camera>();
     }
 
     void Update()
@@ -126,6 +134,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     public HeroStateMoving GetStateMoving() { return MoveState; }
     public HeroStateIdle GetStateIdle() { return IdleState; }
     public HeroStateRestoreEnergy GetStateRestoreEnergy() { return RestoreEnergy; }
+    public hAgressionController GetAgressionController() { return agressionController; }
 
     private void FixedUpdate()
     {
@@ -150,11 +159,63 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     {
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
         ghostObject.transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+
+
+
     }
     void OnMouseUp()
     {
-        // Destroy the ghost object when dragging is complete                
-        this.gameObject.GetComponent<HeroStatController>().SetTargetWaypoint(ghostObject.transform.position);
+
+        //if (ghostObject != null)
+        //{
+        //    Debug.Log("ghost not null " + ghostObject.transform.position.x.ToString());
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//ghostObject.transform.position);    //Input.mousePosition);
+        //    RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction);
+
+        //    if (hit.Length>0)
+        //    {
+        //        Debug.Log("GGGGGGHit ");// + hit.collider.gameObject.name);
+        //    }
+        //}
+        if (ghostObject != null)
+        {
+            //Debug.Log("ghost not null " + ghostObject.transform.position.x.ToString());
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//ghostObject.transform.position);    //Input.mousePosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
+
+            //Debug.DrawRay(new Vector2(0,0), ghostObject.transform.position);
+
+            ////Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+
+            if (hits.Length > 0)
+            {
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider.tag == "Monster")
+                    {
+                        Debug.Log("Monster in target" + hit.collider.tag);
+                        if (this.agressionController.TargetEnemy != null)
+                        {
+                            this.agressionController.TargetEnemy.GetComponent<Enemy>().DisableIcon();
+                        }
+                        this.agressionController.TargetEnemy = hit.collider.gameObject;
+                        this.agressionController.TargetEnemy.GetComponent<Enemy>().EnableIcon();
+                        break;
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            else 
+            {
+                this.gameObject.GetComponent<HeroStatController>().SetTargetWaypoint(ghostObject.transform.position);
+            }
+
+        }
+            // Destroy the ghost object when dragging is complete                
+
         Destroy(ghostObject);
     }
     #endregion
@@ -174,4 +235,6 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         EnemyDamaged,
         PlayFootstepsSound
     }
+
+    
 }

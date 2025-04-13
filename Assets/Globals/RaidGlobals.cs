@@ -5,7 +5,15 @@ public static class RaidGlobals
     private static GameObject SelectedObject;
     private static float defRoll = 20;
 
-    public static void SetSelectedObject(GameObject newObject) {  SelectedObject = newObject; }
+    public static void SetSelectedObject(GameObject newObject) 
+    { 
+        SelectedObject = newObject;
+        if (SelectedObjectIsEnemy())
+        {
+            GameObject.Find("FightPanel").SetActive(false);
+            GameObject.Find("MoveSettings").SetActive(false);
+        }
+    }
     public static GameObject GetSelectedObject() { return SelectedObject; }
     public static bool SelectedObjectIsHero()
     {
