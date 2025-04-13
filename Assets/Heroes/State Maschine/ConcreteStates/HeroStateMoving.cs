@@ -75,17 +75,18 @@ public class HeroStateMoving : HeroState
     public void ResetDestinaton()
     {
         base.hero.GetAgent().destination = base.hero.GetHeroStats().GetTargetWaypoint();
-        base.hero.GetAgent().speed = base.hero.GetHeroStats().GetMoveSettings().GetActual();
+        base.hero.GetAgent().speed = base.hero.GetHeroStats().MoveSettings.GetActionActual();
+          
     }
 
     public void UpdateSpeed()
     {
-        base.hero.GetAgent().speed = base.hero.GetHeroStats().GetMoveSettings().GetActual();
+        base.hero.GetAgent().speed = base.hero.GetHeroStats().MoveSettings.GetActionActual();
     }
 
     public void UpdateEnergyByMove()
     {
-        hero.GetHeroStats().ChangeEnergy(hero.GetHeroStats().GetMoveEP().GetActual() * -1);
+        hero.GetHeroStats().ChangeEnergy(hero.GetHeroStats().MoveSettings.GetPriceActual() * -1);
        
         if (hero.GetHeroStats().GetEnergy().GetPercent() <= hero.GetHeroStats().GetCriticalLevelEnergy())
         {

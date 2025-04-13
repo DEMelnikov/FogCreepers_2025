@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class RaidGlobals
 {
@@ -24,6 +25,14 @@ public static class RaidGlobals
             //movePanel.SetActive(false); 
             //GameObject.Find("FightPanel").SetActive(false);
             //GameObject.Find("MoveSettings").SetActive(false);
+        }
+
+        if (SelectedObjectIsHero()) 
+        {
+            if (movePanel.activeSelf)
+            {
+                movePanel.transform.GetComponentInChildren<MoveEnergySettingsSlider>().UpdateSlider();
+            }
         }
     }
     public static GameObject GetSelectedObject() { return SelectedObject; }

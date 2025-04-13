@@ -17,8 +17,9 @@ public class HeroStatController : MonoBehaviour
     [SerializeField] private bool MoveAllowed = true;
     [SerializeField] private float BaseSpeed = 2f;
     [SerializeField] private float SpeedEP = 0.01f;
-                     private RStatClass MoveSettings = new RStatClass(0, 6,2); //TODO - убрать константы в конструктор
-                     private RStatClass MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
+                     //private RStatClass MoveSettings = new RStatClass(0, 6,2); //TODO - убрать константы в конструктор
+                     //private RStatClass MoveEP = new RStatClass(-0.005f, +0.03f, 0.01f);
+                     private ActionSettingsAndEP moveSettings;
     #endregion
 
     [SerializeField] private float RestoreEnergyEP = 0.015f;
@@ -32,9 +33,13 @@ public class HeroStatController : MonoBehaviour
 
 
 
-
     private void Awake()
     {
+
+        RStatClass MoveParams = new RStatClass(0, 6, 2);                 //TODO - убрать константы в конструктор
+        RStatClass MovePrice  = new RStatClass(-0.005f, +0.03f, 0.01f);  //TODO - убрать константы в конструктор
+
+        moveSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
         //TargetEnergyToRestore = 0.25f;
 
     }
@@ -46,6 +51,7 @@ public class HeroStatController : MonoBehaviour
         Will   = new StatClass(0,maxWill, 25, maxWill);
 
     }
+    public ActionSettingsAndEP MoveSettings { get => moveSettings; set => moveSettings = value; }
 
     public string GetHeroName()  {return HeroName;}
     public bool GetMoveAllowed() { return MoveAllowed;}
@@ -84,26 +90,27 @@ public class HeroStatController : MonoBehaviour
     public void ChangeEnergy(float changeValue) {Energy.ChangeActual(changeValue);}
     public StatClass GetWill() { return Will; }
     public bool GetHaveWaypoint() { return HaveWayPoint; }
-    public RStatClass GetMoveSettings() {  return MoveSettings; }
-    public void SetMoveSettings(float min, float max, float actual, float def)
-    {
-        this.MoveSettings.SetMax(max);
-        this.MoveSettings.SetMin(min);
-        this.MoveSettings.SetActual(actual);
-        this.MoveSettings.SetDef(def);
-    }
-    public void SetMoveSettingsActual(float value)
-    {
-        MoveSettings.SetActual(value);
-    }
-    public RStatClass GetMoveEP() { return MoveEP; }
-    public void SetMoveEP(float min, float max, float actual, float def)
-    {
-        MoveEP.SetMin(min);
-        MoveEP.SetMax(max);
-        MoveEP.SetActual(actual);
-        MoveEP.SetDef(def);
-    }
+    //public RStatClass GetMoveSettings() {  return MoveSettings; }
+    //public void SetMoveSettings(float min, float max, float actual, float def)
+    //{
+    //    this.MoveSettings.SetMax(max);
+    //    this.MoveSettings.SetMin(min);
+    //    this.MoveSettings.SetActual(actual);
+    //    this.MoveSettings.SetDef(def);
+    //}
+
+    //public void SetMoveSettingsActual(float value)
+    //{
+    //    MoveSettings.SetActual(value);
+    //}
+    //public RStatClass GetMoveEP() { return MoveEP; }
+    //public void SetMoveEP(float min, float max, float actual, float def)
+    //{
+    //    MoveEP.SetMin(min);
+    //    MoveEP.SetMax(max);
+    //    MoveEP.SetActual(actual);
+    //    MoveEP.SetDef(def);
+    //}
 
 
     public void DrawWaypoints()
@@ -120,6 +127,8 @@ public class HeroStatController : MonoBehaviour
         {
             Instantiate(WayPointPrefub, TargetWaypoint, Quaternion.identity);
         }
+
+
     }
 
     //public StatClass SetActual
