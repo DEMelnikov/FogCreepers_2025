@@ -39,7 +39,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     //StateMaschine block
     public HeroStateMaschine StateMaschine { get; set; }
     public HeroStateIdle IdleState { get; set; }
-    private HeroStateMoving MoveState { get; set; }
+    public HStateAttack AttackState { get; set; }
+    public HeroStateMoving MoveState { get; set; }
     private HeroStateRestoreEnergy RestoreEnergy { get; set; }
 
     #endregion
@@ -57,12 +58,13 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 
     private void Awake()
     {
-        StateMaschine = new HeroStateMaschine();
-        IdleState = new HeroStateIdle(this, StateMaschine);
-        MoveState = new HeroStateMoving(this, StateMaschine);
-        RestoreEnergy = new HeroStateRestoreEnergy(this, StateMaschine);
+        StateMaschine  = new HeroStateMaschine();
+        IdleState      = new HeroStateIdle(this, StateMaschine);
+        MoveState      = new HeroStateMoving(this, StateMaschine);
+        RestoreEnergy  = new HeroStateRestoreEnergy(this, StateMaschine);
+        AttackState    = new HStateAttack(this, StateMaschine);
 
-        statsH = this.GetComponent<HeroStatController>();
+        statsH              = this.GetComponent<HeroStatController>();
         agressionController = this.GetComponent<hAgressionController>();    
 
         defence = new Defence(this);

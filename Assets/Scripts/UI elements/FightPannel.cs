@@ -16,6 +16,7 @@ public class FightPannel : MonoBehaviour
     private string descriptionText = "";
     [SerializeField] private Slider eHealthSlider;
     [SerializeField] private Slider eEnergySlider;
+    [SerializeField] private Slider hAttackRateSlider;
     //private string 
 
     private void Start()
@@ -58,6 +59,7 @@ public class FightPannel : MonoBehaviour
                     eEnergySlider.gameObject.SetActive(true);
                     // TODOOOOOO
 
+                    //hAttackRateSlider.value = selectedHero.GetComponent<hAgressionController>().AttackRateSettings.GetActionActualPercent();
 
                     eHealthSlider.value = selectedEnemy.GetComponent<Enemy>().GetEStatHandler().GetHealth().GetPercent();
                     eEnergySlider.value = selectedEnemy.GetComponent<Enemy>().GetEStatHandler().GetEnergy().GetPercent();

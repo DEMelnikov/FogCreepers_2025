@@ -31,7 +31,11 @@ public static class RaidGlobals
         {
             if (movePanel.activeSelf)
             {
-                movePanel.transform.GetComponentInChildren<MoveEnergySettingsSlider>().UpdateSlider();
+                movePanel.transform. GetComponentInChildren<MoveEnergySettingsSlider>().UpdateSlider();
+            }
+            if (fightPanel.activeSelf) 
+            {
+                fightPanel.transform.GetComponentInChildren<AttackRateSettingsSlider>().UpdateSlider();
             }
         }
     }

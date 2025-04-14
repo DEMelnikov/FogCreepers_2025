@@ -37,7 +37,8 @@ public class HeroStateIdle : HeroState
 
     public override void PhysicUpdate()
     {
-        if (IsReadyToMove()) { base.hero.StateMaschine.ChangeState(base.hero.GetStateMoving()); }
+        if (IsreadytoFight()) { base.hero.StateMaschine.ChangeState(base.hero.AttackState); }
+        if (IsReadyToMove())  { base.hero.StateMaschine.ChangeState(base.hero.MoveState);   }
 
         if (!IsPause.GetPauseState())
         {
@@ -53,6 +54,15 @@ public class HeroStateIdle : HeroState
     private bool IsReadyToMove()
     {
         if (base.hero.GetHeroStats().GetHaveWaypoint()) {return true;}
+        return false;
+    }
+
+    private bool IsreadytoFight()
+    {
+        if(base.hero.GetAgressionController().TargetEnemy != null)
+        {
+            return true;
+        }
         return false;
     }
 }

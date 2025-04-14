@@ -11,7 +11,6 @@ public class MoveEnergySettingsSlider : MonoBehaviour
 
     private void OnEnable()
     {
-
         UpdateSlider();
     }
     void Update()
@@ -75,7 +74,7 @@ public class MoveEnergySettingsSlider : MonoBehaviour
             if (RaidGlobals.SelectedObjectIsHero())
             {
                 ActionSettingsAndEP moveSettings = RaidGlobals.GetSelectedObject().GetComponent<Hero>().GetHeroStats().MoveSettings;
-                this.GetComponent<Slider>().value = moveSettings.GetActionActualPercent()/100;
+                this.GetComponent<Slider>().value = moveSettings.GetActionActualPercent();
                 Debug.Log("moveSettings.GetActionActualPercent() = "+ moveSettings.GetActionActualPercent());
             }
         }
