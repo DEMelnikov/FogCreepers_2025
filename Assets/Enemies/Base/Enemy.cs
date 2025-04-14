@@ -9,7 +9,10 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent { get; set; }
     private Transform position { get; set; }
+    
     private Attack attack;
+    private Defence defence;
+
     private EnemyAggressionHandler eAggressionHandler;
     private EStatHandler eStatHandler;
     private GameObject iconSprite;
@@ -35,9 +38,10 @@ public class Enemy : MonoBehaviour
     #region SecondarySkills
         private Skill chargeSkill;
         private Skill attackSkill;
+        private Skill defaultDefence;
     #endregion
 
-                     private string path = "Avatars/bestiary/";
+    private string path = "Avatars/bestiary/";
     [SerializeField] private string spriteName = "M1";
                      private string monsterName = "Sceleton";
 
@@ -47,6 +51,7 @@ public class Enemy : MonoBehaviour
     public Skill Dexterity { get => dexterity; set => dexterity = value; }
     public Skill ChargeSkill { get => chargeSkill; set => chargeSkill = value; }
     public Skill AttackSkill { get => attackSkill; set => attackSkill = value; }
+    public Skill DefaultDefence { get => defaultDefence; set => defaultDefence = value; }
 
     private void Awake()
     {
@@ -59,16 +64,13 @@ public class Enemy : MonoBehaviour
         iconSprite = this.gameObject.transform.Find("Icon").gameObject;
         iconSprite.SetActive(false);
 
+        strenght       = new Skill(UnityEngine.Random.Range(0.5f, 3f));
+        chargeSkill    = new Skill(UnityEngine.Random.Range(0.5f, 3f));
+        attackSkill    = new Skill(UnityEngine.Random.Range(0, 2f));
+        defaultDefence = new Skill(10);
 
-
-        float randomStat = UnityEngine.Random.Range(0.5f, 3f);
-        strenght = new Skill(randomStat);
-        //randomStat = Random.Range(0.5f, 3f);
-        chargeSkill = new Skill(UnityEngine.Random.Range(0.5f, 3f));
-        attackSkill = new Skill(UnityEngine.Random.Range(0, 2f));
-
-        attack = new Attack(this);
-
+        attack  = new Attack (this);
+        defence = new Defence(this);
 
         StateMaschine      = new StateMaschine();
         IdleState          = new EnemyStateIdle (this, StateMaschine);
@@ -99,6 +101,7 @@ public class Enemy : MonoBehaviour
     }
 
     public Attack GetAttack() {  return attack; }
+    public Defence GetDefence() { return defence; }
     public EnemyAggressionHandler GetEAggressionHandler() { return eAggressionHandler; }
     public EStatHandler GetEStatHandler() { return eStatHandler; }  
 

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Defence
 {
-    private Hero hero;
+    private Hero  hero;
     private Enemy enemy;
 
-    public Defence(Hero hero) { this.hero = hero; }
+    public Defence(Hero hero)   { this.hero  = hero; }
     public Defence(Enemy enemy) { this.enemy = enemy; }
 
     public float DefaultDefence()
@@ -15,8 +15,8 @@ public class Defence
 
     private float GetDefaultDefenceSkill()
     {
-        //if (enemy != null) { return enemy.Strenght.Max; }
-        if (hero != null) { return hero.DefaultDefence.Max; }
+        if (enemy != null) { return enemy.DefaultDefence.Temp; }
+        if (hero  != null) { return hero. DefaultDefence.Temp; }
         return 0;
     }
 }

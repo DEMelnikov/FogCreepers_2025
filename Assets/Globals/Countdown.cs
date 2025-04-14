@@ -54,4 +54,9 @@ public class Countdown
         return countdown/timeLimit;
     }
 
+    public void SetNewTimeLimit(float timeLimit)
+    {
+        this.timeLimit = timeLimit;
+    }
+
 }

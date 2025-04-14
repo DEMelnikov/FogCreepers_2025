@@ -3,16 +3,28 @@ using UnityEngine;
 public class hAgressionController : MonoBehaviour
 {
     [SerializeField] private GameObject targetEnemy;
-    [SerializeField] private float attackDistance = 2f;
-    [SerializeField] private float stedAndAttack = 2; // multiplayer to attackdistance
-    [SerializeField] private float chargeRange = 5f;
+    [SerializeField] private float attackDistance   = 2f;
+    [SerializeField] private float stepAndAttack    = 2f; // multiplayer to attackdistance
+    [SerializeField] private float chargeRange      = 5f;
 
-                     private ActionSettingsAndEP attackRateSettings;
+    [SerializeField] private float maxDamage        = 6f;
+
+    [SerializeField] private bool allowAttack   = true;
+    [SerializeField] private bool allowCharge   = true;
+    [SerializeField] private bool allowStepNHit = true;
+
+
+
+    private ActionSettingsAndEP attackRateSettings;
 
     public GameObject TargetEnemy { get => targetEnemy; set => targetEnemy = value; }
-    public float AttackDistance { get => attackDistance; set => attackDistance = value; }
-    public float StedAndAttack { get => stedAndAttack; set => stedAndAttack = value; }
-    public float ChargeRange { get => chargeRange; set => chargeRange = value; }
+    public float AttackDistance   { get => attackDistance; set => attackDistance = value; }
+    public float StedAndAttack    { get => stepAndAttack; set => stepAndAttack = value; }
+    public float ChargeRange      { get => chargeRange; set => chargeRange = value; }
+    public bool AllowAttack       { get => allowAttack; set => allowAttack = value; }
+    public bool AllowCharge       { get => allowCharge; set => allowCharge = value; }
+    public bool AllowStepNHit     { get => allowStepNHit; set => allowStepNHit = value; }
+    public float MaxDamage        { get => maxDamage; set => maxDamage = value; }
     public ActionSettingsAndEP AttackRateSettings { get => attackRateSettings; set => attackRateSettings = value; }
 
     private void Start()

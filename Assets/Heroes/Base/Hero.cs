@@ -12,7 +12,7 @@ using static UnityEngine.UI.Image;
 public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
 {
     public Rigidbody2D RB { get ; set; }
-         private Camera cam;
+    private Camera cam;
     public bool IsFacingRight { get; set; }
     public bool IsFacingUp { get; set; }
     private HeroStatController statsH { get; set; }
@@ -46,7 +46,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     #endregion
 
     #region Skills
-    private Skill defaultDefence;
+        private Skill defaultDefence;
     #endregion
 
     private Defence defence;

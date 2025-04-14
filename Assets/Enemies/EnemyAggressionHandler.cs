@@ -13,6 +13,8 @@ public class EnemyAggressionHandler : MonoBehaviour
                      private bool isAble2Charge = true;
     [SerializeField] private float chargeDistance = 10f;
 
+
+
     private ActionSettingsAndEP RegularAttackSettings;
     private CollectionWithTag visibleHeroes;
 
@@ -23,12 +25,9 @@ public class EnemyAggressionHandler : MonoBehaviour
     public float AttackDistance { get => attackDistance; set => attackDistance = value; }
     public bool IsAble2Charge { get => isAble2Charge; set => isAble2Charge = value; }
     public float ChargeDistance { get => chargeDistance; set => chargeDistance = value; }
-
     public void SetTargetHero(GameObject target) { taregetHero =  target; }
     public GameObject GetTargetHero() { return taregetHero; }
-
     public ActionSettingsAndEP GetRegularAttackSrttings() {  return RegularAttackSettings; }
-
     public float GetRaiusVisualSearch() {  return RadiusVisualSearch; }
     public CollectionWithTag GetVisibleHeroes() { return visibleHeroes; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

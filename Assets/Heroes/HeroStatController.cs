@@ -31,6 +31,16 @@ public class HeroStatController : MonoBehaviour
     public StatClass Energy;
     public StatClass Will;
 
+    #region MainStats
+    private Skill strenght;
+    private Skill dexterity;
+    #endregion
+
+    #region SecondarySkills
+    private Skill chargeSkill;
+    private Skill attackSkill;
+    #endregion
+
 
 
     private void Awake()
@@ -38,6 +48,11 @@ public class HeroStatController : MonoBehaviour
 
         RStatClass MoveParams = new RStatClass(0, 6, 2);                 //TODO - убрать константы в конструктор
         RStatClass MovePrice  = new RStatClass(-0.005f, +0.03f, 0.01f);  //TODO - убрать константы в конструктор
+
+        strenght    = new Skill(1);
+        dexterity   = new Skill(1);
+        chargeSkill = new Skill(1); 
+        attackSkill = new Skill(1);
 
         moveSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
         //TargetEnergyToRestore = 0.25f;
@@ -90,6 +105,12 @@ public class HeroStatController : MonoBehaviour
     public void ChangeEnergy(float changeValue) {Energy.ChangeActual(changeValue);}
     public StatClass GetWill() { return Will; }
     public bool GetHaveWaypoint() { return HaveWayPoint; }
+
+    public Skill GetStrenght()     { return strenght; }
+    public Skill GetDexterity()    { return dexterity; }
+    public Skill GetAttackSkill()  { return attackSkill; }
+    public Skill GetChargeSkill() { return chargeSkill; }
+
     //public RStatClass GetMoveSettings() {  return MoveSettings; }
     //public void SetMoveSettings(float min, float max, float actual, float def)
     //{

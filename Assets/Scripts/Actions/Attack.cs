@@ -5,7 +5,7 @@ public class Attack
     private Hero hero;
     private Enemy enemy;
 
-    public Attack(Hero hero) { this.hero = hero; }
+    public Attack (Hero hero) { this.hero = hero; }
     public Attack (Enemy enemy) { this.enemy = enemy; }
 
     public float DefaultAttack( )
@@ -49,7 +49,7 @@ public class Attack
     private float GetAttackSkill()
     {
         if (enemy != null) { return enemy.AttackSkill.Temp; }
-        //if (hero != null) { return hero.}
+        if (hero  != null) { return hero.GetHeroStats().GetAttackSkill().Temp; }
         return 0;
     }
 }
