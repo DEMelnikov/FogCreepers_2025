@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
     private EnemyAggressionHandler eAggressionHandler;
     private EStatHandler eStatHandler;
     private GameObject iconSprite;
+    [SerializeField] private GameObject corpsePrefub;
 
     #region StateMaschine
     //StateMaschine block
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
                      private string monsterName = "Sceleton";
 
     public event Action<Enemy> EnemySelected;
+    public event Action<Enemy> EnemyDead;
 
     public Skill Strenght { get => strenght; set => strenght = value; }
     public Skill Dexterity { get => dexterity; set => dexterity = value; }
@@ -118,5 +121,29 @@ public class Enemy : MonoBehaviour
 
     public void EnableIcon()  {iconSprite.SetActive(true);}
     public void DisableIcon() {iconSprite.SetActive(false);}
-    
+
+    public void GotDamage(float damage)
+    {
+        this.GetEStatHandler().GetHealth().ChangeActual(damage * -1);
+        if (this.GetEStatHandler().GetHealth().GetActualValue() <= 0)
+        {
+            DeathEnemy();
+        }
+    }
+
+    void DeathEnemy()
+    {
+        this.GetComponent<Collider2D>().enabled = false;
+
+        //this.GameObject.Destroy;
+        Debug.Log("Enemy is dead");
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EnemyDead?.Invoke(this);
+        Instantiate(corpsePrefub, this.transform.position, Quaternion.identity);
+    }
+
 }

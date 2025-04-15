@@ -83,12 +83,12 @@ SpriteRenderer:
   m_SortingLayerID: -1472213949
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 9083492214647040391, guid: e81d0df58e78e3746a96ab6bc676618d, type: 3}
+  m_Sprite: {fileID: -364585345, guid: e81d0df58e78e3746a96ab6bc676618d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fa965a3a9de654a9c80d9daaebe492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  corpsePrefub: {fileID: 7919690224122146213, guid: 4bba81e8777a7be43b9f337bf36b9976, type: 3}
   spriteName: M1
 --- !u!195 &3629150644479019867
 NavMeshAgent:

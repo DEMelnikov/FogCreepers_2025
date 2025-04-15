@@ -3,21 +3,37 @@ using UnityEngine;
 public class hAgressionController : MonoBehaviour
 {
     [SerializeField] private GameObject targetEnemy;
-    [SerializeField] private float attackDistance   = 2f;
-    [SerializeField] private float stepAndAttack    = 2f; // multiplayer to attackdistance
-    [SerializeField] private float chargeRange      = 5f;
+    [SerializeField] private float attackDistance = 2f;
+    [SerializeField] private float stepAndAttack = 2f; // multiplayer to attackdistance
+    [SerializeField] private float chargeRange = 5f;
 
-    [SerializeField] private float maxDamage        = 6f;
+    [SerializeField] private float maxDamage = 6f;
 
-    [SerializeField] private bool allowAttack   = true;
-    [SerializeField] private bool allowCharge   = true;
+    [SerializeField] private bool allowAttack = true;
+    [SerializeField] private bool allowCharge = true;
     [SerializeField] private bool allowStepNHit = true;
 
 
 
     private ActionSettingsAndEP attackRateSettings;
 
-    public GameObject TargetEnemy { get => targetEnemy; set => targetEnemy = value; }
+    public GameObject TargetEnemy { 
+        get
+        {
+            return targetEnemy;
+        }
+        set
+        {
+            if (targetEnemy != null) { Debug.Log("Отписка!!!"); targetEnemy.GetComponent<Enemy>().EnemyDead -= ForgetTargetEnemy; }
+            targetEnemy = value;
+            if (targetEnemy != null) { Debug.Log("Подписка!!!"); targetEnemy.GetComponent<Enemy>().EnemyDead += ForgetTargetEnemy; }
+            //value.GetComponent<Enemy>().EnemyDead += 
+        }        
+    }
+    
+
+
+    //public void SetTargetEnemy { set => targetEnemy = value; }
     public float AttackDistance   { get => attackDistance; set => attackDistance = value; }
     public float StedAndAttack    { get => stepAndAttack; set => stepAndAttack = value; }
     public float ChargeRange      { get => chargeRange; set => chargeRange = value; }
@@ -42,5 +58,10 @@ public class hAgressionController : MonoBehaviour
             return Vector2.Distance(this.transform.position, targetEnemy.transform.position);
         }
         return 0;
+    }
+
+    private void ForgetTargetEnemy(Enemy enemy)
+    {
+        targetEnemy = null;
     }
 }

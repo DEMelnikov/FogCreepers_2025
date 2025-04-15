@@ -68,7 +68,12 @@ public class HStateAttack : HeroState
                         float damage = Random.Range(0.1f, hero.GetAgressionController().MaxDamage 
                             + hero.GetHeroStats().GetStrenght().Temp * -1);
 
-                        enemy.GetEStatHandler().GetHealth().ChangeActual(damage);  
+                        //enemy.GetEStatHandler().GetHealth().ChangeActual(damage);  
+                        enemy.GotDamage(damage);
+                        if (enemy.GetEStatHandler().GetHealth().Actual <= 0)
+                        {
+                            //GameObject.Destroy(enemy.transform.Find("Enemy").gameObject);
+                        }
                     } 
 
                     this.hero.GetHeroStats().ChangeEnergy(agressionController.AttackRateSettings.GetPriceActual()*-1);
@@ -99,7 +104,7 @@ public class HStateAttack : HeroState
     private bool CheckEnemy()
     {
         enemy = null;
-        enemy = agressionController.TargetEnemy.GetComponent<Enemy>();
+        enemy = agressionController.TargetEnemy?.GetComponent<Enemy>();
         if (enemy == null) { return false; }
         return true;
     }
