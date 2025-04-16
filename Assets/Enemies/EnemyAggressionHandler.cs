@@ -17,6 +17,7 @@ public class EnemyAggressionHandler : MonoBehaviour
 
     private ActionSettingsAndEP RegularAttackSettings;
     private CollectionWithTag visibleHeroes;
+    private Defence defence;
 
     //[SerializeField] private float chargeENergyLimit = 0.66f;
 
@@ -25,6 +26,8 @@ public class EnemyAggressionHandler : MonoBehaviour
     public float AttackDistance { get => attackDistance; set => attackDistance = value; }
     public bool IsAble2Charge { get => isAble2Charge; set => isAble2Charge = value; }
     public float ChargeDistance { get => chargeDistance; set => chargeDistance = value; }
+    public Defence Defence { get => defence; set => defence = value; }
+
     public void SetTargetHero(GameObject target) { taregetHero =  target; }
     public GameObject GetTargetHero() { return taregetHero; }
     public ActionSettingsAndEP GetRegularAttackSrttings() {  return RegularAttackSettings; }
@@ -40,6 +43,7 @@ public class EnemyAggressionHandler : MonoBehaviour
             new RStatClass(0, 6, 5f));
 
         visibleHeroes = new CollectionWithTag("Hero", RadiusVisualSearch);
+        //defence = new Defence(this.GetComponent<Enemy>());
     }
 
     void Start()

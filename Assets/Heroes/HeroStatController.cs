@@ -49,12 +49,13 @@ public class HeroStatController : MonoBehaviour
         RStatClass MoveParams = new RStatClass(0, 6, 2);                 //TODO - убрать константы в конструктор
         RStatClass MovePrice  = new RStatClass(-0.005f, +0.03f, 0.01f);  //TODO - убрать константы в конструктор
 
+        moveSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
+
         strenght    = new Skill(1);
         dexterity   = new Skill(1);
         chargeSkill = new Skill(1); 
         attackSkill = new Skill(1);
 
-        moveSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
         //TargetEnergyToRestore = 0.25f;
 
     }

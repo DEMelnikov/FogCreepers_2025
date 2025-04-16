@@ -59,4 +59,8 @@ public class Countdown
         this.timeLimit = timeLimit;
     }
 
+    public void SetCountdownToReady()
+    {
+        this.countdown = 0;
+    }
 }

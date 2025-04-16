@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent { get; set; }
     private Transform position { get; set; }
+
+    //private 
     
     private Attack attack;
     private Defence defence;
@@ -22,12 +24,13 @@ public class Enemy : MonoBehaviour
     #region StateMaschine
     //StateMaschine block
     public StateMaschine StateMaschine { get; set; }
-    public EnemyStateIdle IdleState { get; set; }
+    //public EnemyStateIdle IdleState { get; set; }
     public EnemyStateMove MoveState { get; set; }
     public EnemyStateSearchTarget SerachTargetState { get; set; }
     public EnemyStateCloseToHero CloseToHero { get; set; }
     public EnemyStateCharge ChargeState { get; set; }
     public EnemyStateAttackRegular RegularAttackState { get; set; }
+    public LasyEnemyStateIdle IdleState {  get; set; }
 
     //private HeroStateRestoreEnergy RestoreEnergy { get; set; }
     #endregion
@@ -76,12 +79,13 @@ public class Enemy : MonoBehaviour
         defence = new Defence(this);
 
         StateMaschine      = new StateMaschine();
-        IdleState          = new EnemyStateIdle (this, StateMaschine);
+       // IdleState          = new EnemyStateIdle (this, StateMaschine);
         MoveState          = new EnemyStateMove(this, StateMaschine);
         SerachTargetState  = new EnemyStateSearchTarget (this, StateMaschine);
         CloseToHero        = new EnemyStateCloseToHero (this, StateMaschine);
         ChargeState        = new EnemyStateCharge (this, StateMaschine);
         RegularAttackState = new EnemyStateAttackRegular(this, StateMaschine);
+        IdleState          = new LasyEnemyStateIdle (this, StateMaschine);
 
         StateMaschine.Initialize(IdleState);
     }
@@ -125,6 +129,7 @@ public class Enemy : MonoBehaviour
     public void GotDamage(float damage)
     {
         this.GetEStatHandler().GetHealth().ChangeActual(damage * -1);
+        this.GetComponent<ParticleSystem>().Play();
         if (this.GetEStatHandler().GetHealth().GetActualValue() <= 0)
         {
             DeathEnemy();
@@ -137,13 +142,14 @@ public class Enemy : MonoBehaviour
 
         //this.GameObject.Destroy;
         Debug.Log("Enemy is dead");
+        Instantiate(corpsePrefub, this.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
         EnemyDead?.Invoke(this);
-        Instantiate(corpsePrefub, this.transform.position, Quaternion.identity);
+
     }
 
 }

@@ -32,6 +32,7 @@ public class HStateAttack : HeroState
 
         attack = new Attack(this.hero.GetComponent<Hero>());
         attackCountdown = new Countdown(agressionController.AttackRateSettings.GetActionActual(), false);
+        attackCountdown.SetCountdownToReady();
 
         Debug.Log(this.hero.name + "  enters state Attack");
     }
@@ -70,29 +71,44 @@ public class HStateAttack : HeroState
 
                         //enemy.GetEStatHandler().GetHealth().ChangeActual(damage);  
                         enemy.GotDamage(damage);
-                        if (enemy.GetEStatHandler().GetHealth().Actual <= 0)
-                        {
-                            //GameObject.Destroy(enemy.transform.Find("Enemy").gameObject);
-                        }
                     } 
 
                     this.hero.GetHeroStats().ChangeEnergy(agressionController.AttackRateSettings.GetPriceActual()*-1);
                     return;
                 }
 
-                if (distance > attackRange && distance < stepAndHitRange)
+                if (distance > attackRange && distance < stepAndHitRange && agressionController.AllowStepNHit)
                 {
                     //step n hit attack
-                    return;
-                }
+                    Vector2 StepDirection = (enemy.transform.position - hero.transform.position).normalized;
+                    hero.RB.AddForce(StepDirection, ForceMode2D.Impulse);
 
-                if (distance >= stepAndHitRange && distance < chargeRange)
-                {
-                    //charge
+                    float attackRoll = attack.DefaultAttack();
+                    float defenceRoll = enemy.GetDefence().DefaultDefence();
+
+                    Debug.Log("Hero Step n Hit attack " + attackRoll + " vs defence " + defenceRoll);
+
+                    if (attackRoll > defenceRoll)
+                    {
+                        float damage = Random.Range(0.1f, hero.GetAgressionController().MaxDamage
+                            + hero.GetHeroStats().GetStrenght().Temp * -1);
+
+                        //enemy.GetEStatHandler().GetHealth().ChangeActual(damage);  
+                        enemy.GotDamage(damage);
+                    }
+
+                    this.hero.GetHeroStats().ChangeEnergy(agressionController.AttackRateSettings.GetPriceActual() * -1);
+
+
                     return;
                 }
             }
 
+            if (distance >= stepAndHitRange && distance < chargeRange)
+            {
+                base.hero.StateMaschine.ChangeState(base.hero.ChargeState);
+                return;
+            }
             // close to enemy or Controll Distance
 
 

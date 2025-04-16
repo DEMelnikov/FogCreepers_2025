@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static Unity.Collections.AllocatorManager;
 using static UnityEditorInternal.ReorderableList;
 using static UnityEngine.UI.Image;
@@ -41,7 +43,8 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
     public HeroStateIdle IdleState { get; set; }
     public HStateAttack AttackState { get; set; }
     public HeroStateMoving MoveState { get; set; }
-    private HeroStateRestoreEnergy RestoreEnergy { get; set; }
+    public HeroStateRestoreEnergy RestoreEnergy { get; set; }
+    public HStateCharge ChargeState { get; set; }
 
     #endregion
 
@@ -63,6 +66,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         MoveState      = new HeroStateMoving(this, StateMaschine);
         RestoreEnergy  = new HeroStateRestoreEnergy(this, StateMaschine);
         AttackState    = new HStateAttack(this, StateMaschine);
+        ChargeState    = new HStateCharge(this, StateMaschine);
 
         statsH              = this.GetComponent<HeroStatController>();
         agressionController = this.GetComponent<hAgressionController>();    
@@ -77,6 +81,7 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        RB = gameObject.GetComponent<Rigidbody2D>();
 
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
@@ -238,5 +243,16 @@ public class Hero : MonoBehaviour,  HeroIsMoveable, IsSelectable
         PlayFootstepsSound
     }
 
-    
+    public void tempTest()
+    {
+        Rigidbody2D _rb = gameObject.GetComponent<Rigidbody2D>();
+        if (this.GetAgressionController().TargetEnemy != null) 
+        {
+            Vector2 qqq = (this.GetAgressionController().TargetEnemy.transform.position-this.transform.position).normalized;
+            _rb.AddForce(qqq, ForceMode2D.Impulse);
+            //_rb.angularVelocity = new Vector3(0, 0, 0);//this.GetAgressionController().TargetEnemy.transform.position;
+            //_rb.MovePosition(this.GetAgressionController().TargetEnemy.transform.position * 0.6f);
+        }
+
+    }
 }

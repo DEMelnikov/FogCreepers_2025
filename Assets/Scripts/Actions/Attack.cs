@@ -34,15 +34,15 @@ public class Attack
 
     private float GetStrenght()
     {
-        if (enemy != null)  { return enemy.Strenght.Max;}
-        //if (hero != null) { return hero.}
+        if (enemy != null)   { return enemy.Strenght.Temp;}
+        if (hero  != null)   { return hero.GetHeroStats().GetStrenght().Temp; }
         return 0;
     }
 
     private float GetChargeSkill()
     {
-        if (enemy != null) { return enemy.ChargeSkill.Max; }
-        //if (hero != null) { return hero.}
+        if (enemy != null) { return enemy.ChargeSkill.Temp; }
+        if (hero != null) { return hero.GetHeroStats().GetChargeSkill().Temp; }
         return 0;
     }
 

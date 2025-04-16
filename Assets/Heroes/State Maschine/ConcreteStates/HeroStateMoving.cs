@@ -92,7 +92,6 @@ public class HeroStateMoving : HeroState
         {
             base.hero.StateMaschine.ChangeState(base.hero.GetStateRestoreEnergy());
         }
-
     }
 
 

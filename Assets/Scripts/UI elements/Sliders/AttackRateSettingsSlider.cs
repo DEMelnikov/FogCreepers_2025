@@ -33,7 +33,7 @@ public class AttackRateSettingsSlider : MonoBehaviour
                     RaidGlobals.GetSelectedObject().GetComponent<Hero>().AttackState.SetNewAttackRate(
                         RaidGlobals.GetSelectedObject().GetComponent<Hero>().GetAgressionController().AttackRateSettings.GetActionActual());
 
-                    Debug.Log("new attack rate set at attak state = " + this.GetComponent<Slider>().value);
+                    //Debug.Log("new attack rate set at attak state = " + this.GetComponent<Slider>().value);
                 }
                 //if (RaidGlobals.GetSelectedObject().GetComponent<Hero>().StateMaschine.CurrentHeroState ==
                 //    RaidGlobals.GetSelectedObject().GetComponent<Hero>().GetStateMoving())

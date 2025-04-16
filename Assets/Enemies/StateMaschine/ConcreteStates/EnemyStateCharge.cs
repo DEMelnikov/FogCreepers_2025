@@ -40,10 +40,10 @@ public class EnemyStateCharge : EnemyState
         base.FrameUpdate();
     }
 
-    public override string GetStateName()
-    {
-        return "Charge";
-    }
+    //public override string GetStateName()
+    //{
+    //    return "Charge";
+    //}
 
     public override void PhysicUpdate()
     {

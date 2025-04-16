@@ -45,10 +45,10 @@ public class hAgressionController : MonoBehaviour
 
     private void Start()
     {
-        RStatClass MoveParams = new RStatClass(0, 3, 1);                 //TODO - убрать константы в конструктор
-        RStatClass MovePrice = new RStatClass(0.5f, +3f, 1f);  //TODO - убрать константы в конструктор
+        RStatClass AttackRate = new RStatClass(1f, 4f, 2);    //TODO - убрать константы в конструктор
+        RStatClass AttackEP = new RStatClass(0.5f, +3f, 1f);  //TODO - убрать константы в конструктор
 
-        attackRateSettings = new ActionSettingsAndEP(MoveParams, MovePrice);
+        attackRateSettings = new ActionSettingsAndEP(AttackRate, AttackEP);
     }
 
     public float GetDistanceToEnemy()

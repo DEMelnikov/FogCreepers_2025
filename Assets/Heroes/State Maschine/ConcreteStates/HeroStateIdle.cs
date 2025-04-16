@@ -61,6 +61,7 @@ public class HeroStateIdle : HeroState
     {
         if(base.hero.GetAgressionController().TargetEnemy != null)
         {
+            if
             return true;
         }
         return false;
