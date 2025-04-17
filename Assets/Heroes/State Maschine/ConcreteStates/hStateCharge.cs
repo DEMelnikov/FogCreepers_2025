@@ -97,8 +97,7 @@ public class HStateCharge : HeroState
         }
         else 
         {
-            if (base.hero.GetComponent<Hero>().GetAgent().remainingDistance >
-                hero.GetAgressionController().AttackDistance * hero.GetAgressionController().ChargeRange)
+            if (base.hero.GetComponent<Hero>().GetAgent().remainingDistance > hero.GetAgressionController().ChargeRange)
             {
                 base.hero.StateMaschine.ChangeState(base.hero.IdleState);
             }

@@ -61,8 +61,13 @@ public class HeroStateIdle : HeroState
     {
         if(base.hero.GetAgressionController().TargetEnemy != null)
         {
-            if
-            return true;
+
+            if(hero.GetHeroStats().GetMoveAllowed() &&
+                hero.GetAgressionController().GetDistanceToEnemy() < hero.GetAgressionController().ChargeRange)
+            {
+                return true;
+            }
+
         }
         return false;
     }

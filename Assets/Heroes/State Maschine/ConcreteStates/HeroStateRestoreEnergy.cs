@@ -13,7 +13,7 @@ public class HeroStateRestoreEnergy : HeroState
 
     public override void EnterState()
     {
-        //hero.GetComponent<HeroStatController>().SetMoveAllowed(false);
+        Debug.Log(base.hero.name + "enter State Restore energy");
         base.EnterState();
     }
 
@@ -45,7 +45,5 @@ public class HeroStateRestoreEnergy : HeroState
                 base.hero.StateMaschine.ChangeState(base.hero.GetStateIdle());
             }
         }
-
-        base.PhysicUpdate();
     }
 }

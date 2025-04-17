@@ -103,7 +103,7 @@ public class HeroStatController : MonoBehaviour
     public void SetTargetEnergyToRestore(float value ) { TargetEnergyToRestore = value; }
     public float GetCriticalLevelEnergy() { return CriticalLevelEnergy; }
     public void SetCriticalLevelEnergy(float value) {  CriticalLevelEnergy = value; }
-    public void ChangeEnergy(float changeValue) {Energy.ChangeActual(changeValue);}
+
     public StatClass GetWill() { return Will; }
     public bool GetHaveWaypoint() { return HaveWayPoint; }
 
@@ -149,8 +149,15 @@ public class HeroStatController : MonoBehaviour
         {
             Instantiate(WayPointPrefub, TargetWaypoint, Quaternion.identity);
         }
+    }
 
-
+    public void ChangeEnergy(float changeValue) 
+    { 
+        Energy.ChangeActual(changeValue);
+        if (Energy.GetPercent() < CriticalLevelEnergy) 
+        {
+            gameObject.GetComponent<Hero>().StateMaschine.ChangeState(gameObject.GetComponent<Hero>().RestoreEnergy);
+        }
     }
 
     //public StatClass SetActual

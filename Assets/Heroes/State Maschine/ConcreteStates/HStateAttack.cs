@@ -28,7 +28,7 @@ public class HStateAttack : HeroState
 
         attackRange     = agressionController.AttackDistance;
         stepAndHitRange = attackRange * agressionController.StedAndAttack;
-        chargeRange     = attackRange * agressionController.ChargeRange;
+        chargeRange     = agressionController.ChargeRange;
 
         attack = new Attack(this.hero.GetComponent<Hero>());
         attackCountdown = new Countdown(agressionController.AttackRateSettings.GetActionActual(), false);
@@ -57,6 +57,7 @@ public class HStateAttack : HeroState
 
             if (attackCountdown.UpdateCountdown())
             {
+                //regular attack
                 if (distance <= attackRange && agressionController.AllowAttack)
                 {
                     float attackRoll = attack.DefaultAttack();
@@ -77,9 +78,9 @@ public class HStateAttack : HeroState
                     return;
                 }
 
+                //step n Hit attack
                 if (distance > attackRange && distance < stepAndHitRange && agressionController.AllowStepNHit)
                 {
-                    //step n hit attack
                     Vector2 StepDirection = (enemy.transform.position - hero.transform.position).normalized;
                     hero.RB.AddForce(StepDirection, ForceMode2D.Impulse);
 
@@ -99,18 +100,16 @@ public class HStateAttack : HeroState
 
                     this.hero.GetHeroStats().ChangeEnergy(agressionController.AttackRateSettings.GetPriceActual() * -1);
 
-
                     return;
                 }
             }
 
-            if (distance >= stepAndHitRange && distance < chargeRange)
+            if (distance >= stepAndHitRange && distance < chargeRange && agressionController.AllowCharge)
             {
                 base.hero.StateMaschine.ChangeState(base.hero.ChargeState);
                 return;
             }
             // close to enemy or Controll Distance
-
 
             return;
         }
