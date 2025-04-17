@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class MoveActionButton : MonoBehaviour
 {
+    [SerializeField] private GameObject movePanel;
     public void UpDateButtons()
     {
         if (RaidGlobals.GetSelectedObject())
@@ -23,7 +24,11 @@ public class MoveActionButton : MonoBehaviour
                 }
             }
         }
+    }
 
+    public void SwitchActiveMovePanel()
+    {
+        if (movePanel.activeSelf) {movePanel.SetActive(false);} else { movePanel.SetActive(true);}
     }
 
 }

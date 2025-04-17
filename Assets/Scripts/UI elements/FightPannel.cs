@@ -77,4 +77,8 @@ public class FightPannel : MonoBehaviour
             else { this.gameObject.SetActive(false); }
         }
     }
+    public void SwitchPanelActiveState ()
+    {
+        if (this.gameObject.activeSelf) {this.gameObject.SetActive(false);} else { this.gameObject.SetActive(true);}
+    }
 }

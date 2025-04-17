@@ -20,6 +20,7 @@ public class FOWRemove : MonoBehaviour
     {
         tilemap = GetComponent<Tilemap>();
         FoWRemoveCounter = new Countdown(FoWRemoveTimer,false);
+        ClearFOW();
 
         //mainCamera = Camera.main;
     }
